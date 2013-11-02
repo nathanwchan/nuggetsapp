@@ -1,0 +1,187 @@
+#extension-body {
+    min-width: 300px;
+    min-height: 280px;
+    max-height: 450px;
+    height: 280px;
+    background-color: #E8E8E8; 
+}
+
+#extension-container {
+    margin-top: 65px;
+}
+
+.navbar-inner {
+    padding-left: 40px !important;
+    padding-right: 40px !important;
+}
+
+.navbar-icon {
+    margin: 8px 10px 0px -11px;
+}
+
+.navbar-dropdown {
+    margin-top: 2px;
+    margin-right: -12px;
+}
+
+h2, h3, h4, h5 {
+    text-align: center;
+}
+
+p {
+    word-break: break-word;
+}
+
+#login-password-div {
+    margin-left: 0px;
+}
+
+#login-password {
+    margin-right: -5px;
+    padding-right: 22px;
+}
+
+#login-forgot-password-icon {
+    position: relative;
+    cursor: pointer;
+    margin-left: -19px;
+    top: -4px;
+}
+
+.error {
+    color: red;
+    font-size: 12px;
+}
+
+.nugget-title {
+    font-family: garamond, serif;
+    font-size: 28px;
+}
+
+.gray {
+    color: gray;
+}
+
+#nugget-source-div {
+    margin-left: 5px;
+}
+
+#nugget-source-icon {
+    position: relative;
+    cursor: pointer;
+    margin-right: -23px;
+    top: -4px;
+}
+
+#nugget-source {
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+#nugget-source-clear {
+    position: relative;
+    cursor: pointer;
+    margin-left: -23px;
+    top: -4px;
+}
+
+.nugget-messages {
+    margin-top: 5px;
+    margin-bottom: 5px;
+    vertical-align: center;
+}
+
+#nugget-message {
+    font-weight: 500;
+    margin-left: 2px;
+}
+
+#nugget-text-count {
+    color: gray;
+    margin-right: 2px;
+}
+
+#related-nuggets-div {
+    margin-top: 10px;
+}
+
+.nugget-wrapper {
+    position: relative;
+    margin-bottom: -10px;
+    padding: 6px;
+    background: white;
+    box-shadow: 0 1px 0 #D0D0D0;
+}
+
+.nugget-tag {
+    color: gray;
+    font-weight: 600;
+}
+
+.nugget-time-ago {
+    font-size: 12px;
+    font-weight: 200;
+}
+
+.nugget-action-icons {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+.nugget-action-icon {
+    cursor: pointer;
+    margin-left: -15px;
+}
+
+#my-nuggets-search-div {
+    margin-left: 5px;
+}
+
+#my-nuggets-search-icon {
+    position: relative;
+    margin-right: -23px;
+    top: -4px;
+}
+
+#my-nuggets-search {
+    padding-left: 22px;
+    padding-right: 22px;
+}
+
+#my-nuggets-search-clear {
+    position: relative;
+    cursor: pointer;
+    margin-left: -23px;
+    top: -4px;
+}
+
+.welcome-subtext {
+    font-size: 12px;
+    margin-top: -10px;
+    margin-bottom: 20px;
+}
+
+#welcome-done-button {
+    margin-bottom: 20px;
+}
+
+.highlight {
+    background-color: #FFFF00;
+}
+
+.well, .navbar-inner, .popover, .btn, .tooltip, input, select, textarea, pre, .progress, .modal, .add-on, .alert, .table-bordered, .nav>.active>a, .dropdown-menu, .tooltip-inner, .badge, .label, .img-polaroid {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+    -webkit-border-radius: 0px !important;
+    -moz-border-radius: 0px !important;
+    border-radius: 0px !important;
+    border-collapse: collapse !important;
+    background-image: none !important;
+}
+
+.table td {
+    padding: 8px 0 8px 0;
+}
+
