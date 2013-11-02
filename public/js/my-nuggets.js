@@ -44,13 +44,14 @@ function addHighlightMarkup(text, highlightText)
 function updateMyNuggetsMarkup(results, highlightText)
 {
   var my_nuggets_markup = [];
+   var markup_to_push_col1 ='<div class="span3">';
+   var markup_to_push_col2 ='<div class="span3">';
+   var markup_to_push_col3 ='<div class="span3">';
+   var markup_to_push_col4 ='<div class="span3">';
   for(i=0;i<results.length;i++)
   {
-    var markup_to_push =''; 
-    if(i%4 == 0) {
-      //markup_to_push += '<div class ="row-fluid">';
-    }
-    markup_to_push += '<div class="span3"><div id="' + results[i].id + '" class="nugget-wrapper"><p>' + addHighlightMarkup(results[i].text, highlightText);
+    var markup_to_push = '';
+    markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper"><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
     var tags = results[i].tags;
     for (j=0;j<tags.length;j++)
     {
@@ -72,13 +73,23 @@ function updateMyNuggetsMarkup(results, highlightText)
     }
     markup_to_push += '<div class="row-fluid"><span class="nugget-time-ago">' + timeAgo + '</span>';
     markup_to_push += '<span class="span1 pull-right nugget-action-icons" style="display: none;"><i class="icon-trash nugget-action-icon"></i></span>';
-    markup_to_push += '</div></div></div>';
-    if(i%4 == 3) {
-      //markup_to_push += '</div>';
-      //alert(results[i].highlightText);
+    markup_to_push += '</div></div></div></div>';
+    if(i%4 == 0) {
+      markup_to_push_col1 += markup_to_push;
     }
-    my_nuggets_markup.push(markup_to_push);
+    else if (i%4 == 1) markup_to_push_col2 += markup_to_push;
+    else if (i%4 == 2) markup_to_push_col3 += markup_to_push;
+    else markup_to_push_col4 += markup_to_push;
+    
   }
+  markup_to_push_col1 += "</div></div>";
+  markup_to_push_col2 += "</div></div>";
+  markup_to_push_col3 += "</div></div>";
+  markup_to_push_col4 += "</div></div>";
+  my_nuggets_markup.push(markup_to_push_col1);
+  my_nuggets_markup.push(markup_to_push_col2);
+  my_nuggets_markup.push(markup_to_push_col3);
+  my_nuggets_markup.push(markup_to_push_col4);
   $('#my-nuggets-table').html(my_nuggets_markup.join(''));
 }
 
