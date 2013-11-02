@@ -114,9 +114,22 @@ p {
     box-shadow: 0 1px 0 #D0D0D0;
 }
 
+.nugget-wrapper a {
+    font-size: 10px;
+}
+
+.col1 {
+    margin-left: 10px;
+}
+
+.col4 {
+    margin-right: 10px;
+}
+
 .nugget-tag {
     color: gray;
     font-weight: 600;
+    font-size: 10px;
 }
 
 .nugget-time-ago {

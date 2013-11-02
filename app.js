@@ -37,6 +37,11 @@ app.get('/login/:id?', function(req, res) {
         title: 'New Employee'
     });
 });
+app.get('/user/:id', function(req, res) {
+    res.render('my-nuggets', {
+        user: req.params.id
+    });
+});
 app.get('/nuggets', function(req, res) {
     res.render('nuggets');
 });
