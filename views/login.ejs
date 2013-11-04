@@ -13,10 +13,10 @@
   <body id="extension-body">
     <div>
       <h2 class="nugget-title">Nuggets</h2>
-      <h5>Remember what you learn</h5>
+      <h5>Learn. Remember. Share</h5>
       <hr/>
       <div id="login-div" class="row-fluid">
-        <form class="span12">
+        <form class="span4 offset4">
           <label>Email address</label>
           <input id="login-email" type="text" class="span12"/>
           <label>Password</label>
@@ -29,23 +29,33 @@
           <p id="login-password-message" class="error" style="display: none;"></p>
           <input id="login-button" class="btn btn-primary span4" type="button" value="Login"/>
         </form>
+      </div>
+      <div id="login-div" class="row-fluid">
+        <div class="span4 offset4">
         <p><a id="go-to-register" href="#">Create a Nugget account</a></p>
+        </div>
       </div>
       <div id="register-div" class="row-fluid" style="display: none;">
-        <form class="span12">
-          <label>Name</label>
-          <input id="register-name" type="text" class="span12"/>
+        <form class="spana4 offset4">
+          <label>Username</label>
+          <input id="register-name" type="text"/>
           <p id="register-error-1" class="error" style="display: none;">Please tell us your name!</p>
           <label>Email address</label>
-          <input id="register-email" type="text" class="span12"/>
+          <input id="register-email" type="text"/>
           <p id="register-error-2" class="error" style="display: none;">The email you provided appears invalid.  Please check that you entered it correctly.</p>
           <label>Password</label>
-          <input id="register-password" type="password" class="span12"/>
+          <input id="register-password" type="password"/>
           <p id="register-error-3" class="error" style="display: none;">Please use a password of at least 6 characters.</p>
           <p id="register-error-4" class="error" style="display: none;"></p>
-          <input id="register-button" class="btn btn-primary span4" type="button" value="Register"/>
+          <div class="row-fluid"></div>
+            <input id="register-button" class="btn btn-primarys" type="button" value="Register"/>
+          </div>
         </form>
-        <p><a id="go-to-login" href="#">Already a member?</a></p>
+        <div id="go-to-login" class="row-fluid">
+          <div class="spana4 offset4">
+          <p><a  href="#">Already a member?</a></p>
+          </div>
+        </div>
       </div>
     </div>
   </body>

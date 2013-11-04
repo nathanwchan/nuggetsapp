@@ -2,20 +2,20 @@
 <html>
   <head>
     <title>Nuggets</title>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
-    <link rel="stylesheet" type="text/css" href="css/styling.css">
-    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.js"></script>
-    <script type="text/javascript" src="js/parse-1.2.8.min.js"></script>
-    <script type="text/javascript" src="js/moment.min.js"></script>
-    <script type="text/javascript" src="js/my-nuggets.js"></script>
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/css/styling.css">
+    <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="/js/bootstrap.js"></script>
+    <script type="text/javascript" src="/js/parse-1.2.8.min.js"></script>
+    <script type="text/javascript" src="/js/moment.min.js"></script>
+    <script type="text/javascript" src="/js/shownuggets.js"></script>
   </head>
   <body id="extension-body">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
         <img src="/img/nuggets24.png" class="pull-left navbar-icon"/>
-        <span class="brand">My nuggets</span>
+        <span class="brand">Recent Nuggets</span>
         <div class="navbar-dropdown">
           <div class="btn-group pull-right">
             <button class="btn btn-small dropdown-toggle" data-toggle="dropdown" tabindex="-1"><i class="icon-th-list"></i></button>
@@ -30,7 +30,7 @@
     </div>
     <div id="extension-container">
           <div id="my-nuggets-search-div" class="row-fluid" style="display: none;">
-            <div class="span4 offset4">
+            <div class="span4 offset5">
               
                 <span id="my-nuggets-search-icon"><i class="icon-search"></i></span>
                 <input id="my-nuggets-search" type="text" placeholder="Search"/>
@@ -40,6 +40,7 @@
           </div>
             <div class="row-fluid">
             <div id="my-nuggets-table" class="">
+              
             </div>
             </div>
     </div>

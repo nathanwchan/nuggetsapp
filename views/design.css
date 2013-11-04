@@ -1,0 +1,195 @@
+nugget-text {
+float: left;
+color: #FFFFFF;
+color: #000;
+text-decoration: none;
+}
+body
+{
+background-image:url("bg-tile.gif");
+
+background-color:#cccccc;
+}
+#logo {
+    margin-top: 60px;
+    margin-bottom: 12px; 
+    display:block;
+    clear: both;
+    min-height: 40px;
+position: relative;
+text-decoration: none;
+text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+}
+body {
+color: #000000;
+font: 15px/22px;
+font-weight: normal;
+}
+
+#mc_embed_signup form {
+    
+    display: block; 
+    clear:both; 
+    width: 500px;
+    text-align: center;
+    margin-left:auto;
+margin-right:auto;
+background-color: transparent; 
+}
+#signup {
+    margin-top: 60px; 
+    display:block;
+    clear: both;
+    text-align: center;
+    margin-left:auto;
+margin-right:auto;
+margin-bottom: 20px; 
+}
+
+#signup p {
+    color: #9ac594;
+    font-size:  20px;
+    font-family: "Museo Sans",museo-sans,Museo-Sans-n5,Arial,Helvetica,sans-serif;
+    -webkit-margin-before: 0em;
+-webkit-margin-after: 0em;
+margin-top: 5px; 
+}
+
+#signup h2 {
+    font-size:  40px;
+    ont-family: "Museo Sans",museo-sans,Museo-Sans-n5,Arial,Helvetica,sans-serif;
+    font-weight: 200;
+    color: #fff;
+ -webkit-background-clip: text;
+ -webkit-margin-before: 0em;
+-webkit-margin-after: 0em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+
+}
+
+#mc_embed_signup .center{
+    
+
+text-align: center;
+margin-left:auto;
+margin-right:auto;
+clear:both; 
+}
+
+.center {
+    display: block;
+    text-align: center;
+margin-left:auto;
+margin-right:auto;
+clear:both; 
+}
+
+button, input {
+    
+    width: 230px;
+    height: 25px;
+    clear: both;
+    padding: 3px; 
+}
+
+input[type="submit"], input[type="reset"], input[type="file"]::-webkit-file-upload-button, button {
+    width: 60px;
+    height: 30px;
+}
+
+#MyBetaList {
+    margin-top: 40px; 
+    font: 16px; 
+}
+
+#MyBetaList-step1 h2{
+    
+    font-size: 16px;
+    margin: 40px;
+    -webkit-margin-before: 0em;
+-webkit-margin-after: 0em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
+
+.why {
+    display:block;
+    clear: both;
+    text-align: center;
+    margin-left:auto;
+margin-right:auto;
+    margin-top: 45px;
+    margin-bottom: 35px;
+    color: #fff; 
+}
+
+._4_j7 {
+    text-align: center; 
+}
+
+#MyBetaList-step2 h2{
+    
+    font-size: 20px;
+    margin: 40px;
+    -webkit-margin-before: 0em;
+-webkit-margin-after: 0em;
+-webkit-margin-start: 0px;
+-webkit-margin-end: 0px;
+}
+
+#MyBetaList-step2 p{
+    
+    font-size: 16px; 
+}
+
+#MyBetaList-step2  a{
+    color: white; 
+}
+
+div.ui-btn, button, input[type="submit"] {
+    -webkit-appearance: none;
+    width: 60px;
+    height: 35px;
+
+    padding: 5px;
+    border: 0px outset buttonface;
+
+}
+
+input[type="submit"] p{
+    
+    font-size: 40px; 
+}
+
+
+#nugget-text {
+font-size: 18px;
+line-height: 24px;
+color: #000;
+font-style: normal;
+font-weight: normal; 
+text-decoration: none;
+text-transform: none;
+letter-spacing: normal;
+clear: both;
+font-weight: normal;
+-webkit-font-smoothing: antialiased;
+}
+
+
+
+#nugget-meta {
+font-size: 10px;
+font-family: "maven-pro","Helvetica Neue","Helvetica",Arial,sans-serif;
+margin-top: 5px; 
+left: 30px; 
+color: #6C6C6C;
+font-style: normal;
+font-weight: normal; 
+text-decoration: none;
+text-transform: none;
+letter-spacing: normal;
+}

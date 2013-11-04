@@ -105,6 +105,12 @@ p {
     margin-top: 10px;
 }
 
+.center {
+    float: none;
+    margin-left: auto;
+    margin-right:auto;
+}
+
 .nugget-wrapper {
     position: relative;
     margin-bottom: -10px;
