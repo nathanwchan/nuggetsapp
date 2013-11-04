@@ -51,6 +51,9 @@ app.get('/create', function(req, res) {
 app.get('/my-nuggets', function(req, res) {
     res.render('my-nuggets');
 });
+app.get('/welcome', function(req, res) {
+    res.render('welcome');
+});
 app.get('/nuggets/:id', function(req, res) {
     
     res.render('shownuggets');
