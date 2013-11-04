@@ -157,6 +157,8 @@ p {
 
 #my-nuggets-search-div {
     margin-left: 5px;
+    vertical-align: middle;
+    padding-top: 5px;
 }
 
 #my-nuggets-search-icon {
@@ -168,6 +170,7 @@ p {
 #my-nuggets-search {
     padding-left: 22px;
     padding-right: 22px;
+    vertical-align: middle;
 }
 
 #my-nuggets-search-clear {
