@@ -3,7 +3,8 @@
     min-height: 280px;
     max-height: 450px;
     height: 280px;
-    background-color: #E8E8E8; 
+    background-color: #E8E8E8;
+    padding: 0 30px 30px 30px;
 }
 
 #extension-container {

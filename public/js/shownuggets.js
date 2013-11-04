@@ -9,7 +9,7 @@ $('#my-nuggets-table').on('click', 'a.nugget-source-link', function(event) {
 
 function initialize() {
   Parse.initialize("F1fRCfIIYQzvft22ckZd5CdrOzhVecTXkwfgWflN", "DUoWr9lIjQME2MmqgMApFmWFdzMcl7B6mKfj8AAc");
-  validateLogin();
+  runQuery();
 }
 
 function goToLoginPage()
