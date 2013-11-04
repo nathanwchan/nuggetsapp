@@ -25,7 +25,7 @@ function validateLogin() {
 
 function goToNuggetPage()
 {
-  window.location.replace('nuggets');
+  window.location.replace('my-nuggets');
 }
 
 function goToWelcomePage()

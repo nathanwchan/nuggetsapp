@@ -43,7 +43,10 @@ app.get('/user/:id', function(req, res) {
     });
 });
 app.get('/login', function(req, res) {
-    res.render('nuggets');
+    res.render('login');
+});
+app.get('/create', function(req, res) {
+    res.render('create');
 });
 app.get('/my-nuggets', function(req, res) {
     res.render('my-nuggets');

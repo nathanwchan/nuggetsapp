@@ -59,7 +59,7 @@
                 .on('click', $.proxy(this.handleClick, this))
                 .on('focusin', $.proxy(this.handleFocus, this))
                 .on('focusout', $.proxy(this.handleBlur, this))
-                .width($('#extension-body').width() - 12) // hacky! minus 12 because of 1px border and 5px padding
+                .width($('#nugget-text').width()) // hacky! minus 12 because of 1px border and 5px padding
                 .insertAfter(this.$formInput);
             this.parseFormInput();
             this.channel.subscribe('add', $.proxy(this.handleAdd, this));
