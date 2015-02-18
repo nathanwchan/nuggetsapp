@@ -429,7 +429,7 @@ p.description {
 }
 
 .room1 .navBar::after {
-	content: 'Makers';
+	content: '#life';
 }
 
 .room1 .username::after {
@@ -455,7 +455,7 @@ p.description {
 }
 
 .room1 .roomCaption::after {
-	content: 'New print day!';
+	content: 'At death, people react in 3 patterns. 1) need for forgiveness 2) need for remembrance 3) need for meaning. Littlest things can give you peace in those final moments!';
 }
 
 /* room 2 */
