@@ -415,7 +415,7 @@ p.description {
 }
 
 .room1 .navBar::after {
-	content: '#life';
+	content: 'From a month ago...';
 }
 
 .room1 .username::after {
@@ -436,12 +436,12 @@ p.description {
 }
 
 .room1 .ufi .like::after {
-	content: 'Deece \00a0\00a0 3';
-	background-image: url('../images/emoji-hova.png');
+	content: 'Remind me more';
+	background-image: url('../img/remind_more.png');
 }
 
 .room1 .roomCaption::after {
-	content: 'At death, people react in 3 patterns. 1) need for forgiveness 2) need for remembrance 3) need for meaning. Littlest things can give you peace in those final moments!';
+	content: '';
 }
 
 /* room 2 */
@@ -451,7 +451,7 @@ p.description {
 }
 
 .room2 .navBar::after {
-	content: 'Kendama';
+	content: 'From a year ago...';
 }
 
 .room2 .username::after {
@@ -472,8 +472,8 @@ p.description {
 }
 
 .room2 .ufi .like::after {
-	content: 'Spiked \00a0\00a0 14';
-	background-image: url('../images/emoji-eyes.png');
+	content: 'Remind me more';
+	background-image: url('../img/remind_more.png');
 }
 
 .room2 .roomCaption::after {
@@ -487,7 +487,7 @@ p.description {
 }
 
 .room3 .navBar::after {
-	content: 'Ramen Hunters';
+	content: 'From yesterday...';
 }
 
 .room3 .username::after {
@@ -508,8 +508,8 @@ p.description {
 }
 
 .room3 .ufi .like::after {
-	content: 'Nommed \00a0\00a0 6';
-	background-image: url('../images/emoji-ramen.png');
+	content: 'Remind me more';
+	background-image: url('../img/remind_more.png');
 }
 
 .room3 .roomCaption::after {
@@ -632,7 +632,7 @@ p.description {
 }
 
 #screen2 .navBar::after {
-	content: 'Note';
+	content: 'Discover';
 }
 
 #screen2 .roomBody {
@@ -648,7 +648,7 @@ p.description {
 }
 
 #screen2 .username::after {
-	content: 'shredly';
+	content: '';
 }
 
 #screen2 .roomContent {
@@ -693,7 +693,7 @@ p.description {
 	background-size: 16px 16px;
 	background-repeat: no-repeat;
 	background-position: left center;
-	background-image: url('../images/emoji-tongue.png');
+	background-image: url('../img/save_icon.png');
 }
 
 /* Invite Screen */

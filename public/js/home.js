@@ -28,9 +28,9 @@ $(function() {
 	}, 3500);
 	
 	var inputArgs = [
-		['sashimi', 'emoji1'],
-		['bikeguy', 'emoji2'],
-		['libby', 'emoji3']
+		['#trivia', 'emoj'],
+		['#bigbang', 'emoj'],
+		['#history', 'emoj']
 	];
 	
 	var currentIdx = 0;
