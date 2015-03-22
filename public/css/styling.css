@@ -3,12 +3,19 @@
     min-height: 280px;
     max-height: 450px;
     height: 280px;
-    background-color: #E8E8E8;
+    background-color: #FFFFFF;
     padding: 0 30px 30px 30px;
+}
+
+#logo {
+    width: 300px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 #extension-container {
     margin-top: 65px;
+    text-align: center;
 }
 
 .navbar-inner {
@@ -38,7 +45,7 @@ p {
 }
 
 #login-password {
-    margin-right: -5px;
+    margin-right: 0px;
     padding-right: 22px;
 }
 
@@ -209,3 +216,11 @@ p {
     padding: 8px 0 8px 0;
 }
 
+#login-div select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
+{
+    height: 50px;
+}
+
+.btn-lg {
+    min-height: 50px;
+}

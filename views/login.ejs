@@ -5,6 +5,7 @@
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/styling.css">
+
     <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/parse-1.2.8.min.js"></script>
@@ -12,25 +13,25 @@
   </head>
   <body id="extension-body">
     <div>
-      <h2 class="nugget-title">Nuggets</h2>
-      <h5>Learn. Remember. Share</h5>
+      <div id="logo">
+        <img src="/img/nuggets_logo.png"/>
+      </div>
       <hr/>
       <div id="login-div" class="row-fluid">
-        <form class="span4 offset4">
-          <label>Email address</label>
-          <input id="login-email" type="text" class="span12"/>
-          <label>Password</label>
+        <form class="span4 offset4 text-center">
+          <input id="login-email" placeholder="email" type="text" class="span12"/>
           <div id="login-password-div" class="span12">
-            <input id="login-password" type="password" class="span12"/>
-            <span id="login-forgot-password-icon" data-toggle="tooltip" data-placement="top" title="" data-original-title="Forgot password?"><i class="icon-question-sign"></i></span>
+            <input id="login-password" placeholder="password" type="password" class="span12"/>
+            
           </div>
           <p id="login-error-1" class="error" style="display: none;">Please provide both an email address and password to sign in.</p>
           <p id="login-error-2" class="error" style="display: none;">The email or password you provided does not appear to be valid.  Please check that you entered them correctly.</p>
           <p id="login-password-message" class="error" style="display: none;"></p>
-          <input id="login-button" class="btn btn-primary span4" type="button" value="Login"/>
+          <input id="login-button" class="btn-warning btn-lg span4" type="button" value="Sign In"/>
+          <a data-toggle="tooltip" data-placement="top" title="Forgot Password?" data-original-title="Forgot password?"></a>
         </form>
       </div>
-      <div id="login-div" class="row-fluid">
+      <div id="login-div" class="row-fluid"
         <div class="span4 offset4">
         <p><a id="go-to-register" href="#">Create a Nugget account</a></p>
         </div>

@@ -27,7 +27,7 @@ h2 {
 	line-height: 28px;
 	text-align: center;
 	margin: 24px auto;
-	color: white;
+	color: black;
 	font-weight: 600;
 	padding: 0 12px;
 	width: 320px;
@@ -94,6 +94,9 @@ p {
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, .1) inset;
 }
 
+#logo {
+	min-height: 50px;
+}
 .introContent {
 	position: absolute;
 	top: 50%;
@@ -110,37 +113,20 @@ p.description {
 }
 
 .appStoreLinkContainer {
-	margin: -4px;
-	position: absolute;
-	bottom: 32px;
-	left: 50%;
-	margin-left: -81px;
-	background: black;
-	overflow: hidden;
-	border-radius: 4px;
-}
-
-.appStoreLinkContainer::after {
-	position: absolute;
-	left: 0;
-	bottom: 0;
-	right: 0;
-	top: 0;
-	border: 2px solid black;
-	content: '';
-	border-radius: 4px;
+	text-align: center;
+	margin-left: auto; 
+	margin-right: auto;
+	margin-top: 20px;
 }
 
 .appStoreLink {
-	display: block;
-	width: 162px;
-	height: 48px;
+	max-width: 200px;
 }
 
 /* street screen */
 
 #street {
-	background-color: #5fceea;;
+	background-color: white;
 	position: relative;
 	padding-top: 20px;
 }
@@ -249,7 +235,7 @@ p.description {
 /* customize screen */
 	
 #customize {
-	background-color: #1840b2;
+	background-color: white;
 }
 
 #screens,
@@ -533,7 +519,7 @@ p.description {
 /* Nickname Screen */
 
 #nickname {
-	background-color: #ff4f4f;
+	background-color: #white;
 }
 
 #nameWrap {
@@ -635,7 +621,8 @@ p.description {
 
 /* community */
 #community {
-	background-color: #34c9a4;
+	background-color: rgb(242, 242, 242);
+	margin-top: 30px;
 }
 
 #screen2 .navBar {
@@ -712,7 +699,7 @@ p.description {
 /* Invite Screen */
 
 #invite {
-	background-color: #662aea;
+	background-color: #white;
 }
 
 #invite .appStoreLinkContainer {
@@ -1062,7 +1049,7 @@ only screen and (min-width : 375px) and (max-width : 960px) {
 	.introContent {
 		width: 320px;
 		margin-left: -160px;
-		margin-top: -160px;
+		margin-top: -260px;
 	}
 	
 	.background {

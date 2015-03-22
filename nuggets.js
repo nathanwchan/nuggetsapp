@@ -10,7 +10,7 @@ function initialize() {
 
 function goToLoginPage()
 {
-  window.location.replace('login');
+  window.location('/');
 }
 
 function runQuery()
