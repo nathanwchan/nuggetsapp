@@ -100,7 +100,7 @@ p {
 .introContent {
 	position: absolute;
 	top: 50%;
-	margin-top: -195px;
+	margin-top: -230px;
 	width: 288px;
 	left: 50%;
 	margin-left: -144px;
@@ -342,7 +342,7 @@ p.description {
 .roomContent .image {
 	background-size: 864px 288px;
 	background-repeat: no-repeat;
-	background-image: url('../images/content.jpg');
+	background-image: url('../img/reminder_image.png');
 	-webkit-transition: opacity .3s ease;
 	-moz-transition: opacity .3s ease;
 }
@@ -419,7 +419,7 @@ p.description {
 }
 
 .room1 .username::after {
-	content: 'Analog';
+	content: '#design #startup';
 }
 
 .room1 .roomContent .image1 {
@@ -455,7 +455,7 @@ p.description {
 }
 
 .room2 .username::after {
-	content: 'Ozora';
+	content: '#life';
 }
 
 .room2 .roomContent .image2 {
@@ -491,7 +491,7 @@ p.description {
 }
 
 .room3 .username::after {
-	content: 'Regiscottonball';
+	content: '#trivia #energyUse #stats';
 }
 
 .room3 .roomContent .image3 {
