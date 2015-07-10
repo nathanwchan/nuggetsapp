@@ -1,0 +1,14 @@
+{
+  "global": {
+    "parseVersion": "1.4.2"
+  },
+  "applications": {
+    "Nuggets of Wisdom": {
+      "applicationId": "F1fRCfIIYQzvft22ckZd5CdrOzhVecTXkwfgWflN",
+      "masterKey": "f6KVEmtSZUE2Oc3RG5GFw12Z6ZABteb0RkPUc4jc"
+    },
+    "_default": {
+      "link": "Nuggets of Wisdom"
+    }
+  }
+}
