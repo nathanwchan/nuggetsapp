@@ -9,6 +9,12 @@ body, html, #wrapper {
 	height: 100%;
 }
 
+.coming-soon p{
+	font-size: 18px;
+	margin-top: 15px; 
+	color: gray;
+}
+
 .myButton {
 	background-color:#5837F2;
 	-moz-border-radius:40px;
@@ -133,7 +139,7 @@ p {
 }
 
 p.description {
-	font-weight: 600;
+	font-weight: 500;
 }
 
 .appStoreLinkContainer {
@@ -1067,13 +1073,13 @@ only screen and (min-width : 375px) and (max-width : 960px) {
 	}
 	
 	p.description {
-		font-size: 21px;
+		font-size: 24px;
 		line-height: 36px;
 	}
 	
 	.introContent {
-		width: 320px;
-		margin-left: -160px;
+		width: 400px;
+		margin-left: -200px;
 		margin-top: -260px;
 	}
 	

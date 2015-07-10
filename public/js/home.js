@@ -25,7 +25,7 @@ $(function() {
 	
 	setInterval(function() {
 		magicEightBall();
-	}, 3500);
+	}, 5500);
 	
 	var inputArgs = [
 		['#trivia', 'emoj'],
@@ -38,7 +38,7 @@ $(function() {
 		performTyping(inputArgs[currentIdx][0], inputArgs[currentIdx][1], function() {
 			currentIdx++;
 			if (currentIdx >= inputArgs.length) { currentIdx = 0; }
-			setTimeout(function() { typeCurrent(); }, 3000);
+			setTimeout(function() { typeCurrent(); }, 5000);
 		});
 	}
 	typeCurrent();
@@ -67,7 +67,7 @@ function magicEightBall() {
 		idx++;
 		idx = idx >= roomClasses.length ? 0 : idx;
 		setTimeout(function() { screen.addClass(roomClasses[idx]); }, 0);
-	}, 100);
+	}, 400);
 	
 	setTimeout(function() {
 		emoji.css({'-webkit-animation-name' : 'like', '-moz-animation-name' : 'like'});
@@ -76,8 +76,8 @@ function magicEightBall() {
 		setTimeout(function() {
 			emoji.css({'-webkit-animation-name' : '', '-moz-animation-name' : ''});
 			wash.css({'-webkit-animation-name' : '', '-moz-animation-name' : ''});
-		}, 2000);
-	}, 800);
+		}, 4000);
+	}, 2000);
 }
 
 function performTyping(nameStr, emoji, callback) {
