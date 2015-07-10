@@ -9,6 +9,29 @@ body, html, #wrapper {
 	height: 100%;
 }
 
+.myButton {
+	background-color:#5837F2;
+	-moz-border-radius:40px;
+	-webkit-border-radius:40px;
+	border-radius:40px;
+	display:inline-block;
+	cursor:pointer;
+	color:#ffffff;
+	font-family:Arial;
+	font-size:26px;
+	padding:20px 50px;
+	text-decoration:none;
+	margin-top:60px;
+}
+.myButton:hover {
+	background-color: #FF7019;
+}
+.myButton:active {
+	position:relative;
+	top:1px;
+}
+
+
 body {
 	font-family: 'Avenir Next W01', 'Avenir Next', Helvetica, Arial, sans-serif;
 	background-color: #f2f2f2;
@@ -42,6 +65,7 @@ h3 {
 p {
 	font-size: 24px;
 	line-height: 26px;
+	margin-top: -20px;
 }
 
 .section {
@@ -101,9 +125,9 @@ p {
 	position: absolute;
 	top: 50%;
 	margin-top: -230px;
-	width: 288px;
+	width: 400px;
 	left: 50%;
-	margin-left: -144px;
+	margin-left: -200px;
 	height: 250px;
 	text-align: center;
 }
@@ -1043,7 +1067,7 @@ only screen and (min-width : 375px) and (max-width : 960px) {
 	}
 	
 	p.description {
-		font-size: 30px;
+		font-size: 21px;
 		line-height: 36px;
 	}
 	
