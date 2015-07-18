@@ -126,6 +126,7 @@ p {
 
 #logo {
 	min-height: 50px;
+	margin-top: -40px; 
 }
 .introContent {
 	position: absolute;
