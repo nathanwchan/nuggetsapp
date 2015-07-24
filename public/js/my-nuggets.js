@@ -100,6 +100,7 @@ function runQuery()
   query.equalTo("user", Parse.User.current()).descending("updatedAt");
   query.notEqualTo("isDeleted", true);
   query.include("nugget");
+  query.limit(1000);
   query.find({
     success: function(results_nugget_user) {
       if (results_nugget_user.length == 0)
