@@ -5,16 +5,21 @@ Parse.Cloud.define("hello", function(request, response) {
   response.success("Hello world!");
 });
 
-Parse.Cloud.job("sendEmail", function(request, status) {
+Parse.Cloud.job("testReminderEmail", function(request, status) {
 
+  	// initialize mailgun
   	// initialize mailgun
     var Mailgun = require('mailgun');
 	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
-	
+    
 	var query = new Parse.Query(Parse.User);   // Query for all users  
+	var totalUserCount = 0;
+	var emailSentCount = 0; 
 
 	query.each(function(user) {
-
+	totalUserCount++; 
+	try
+	{
 	var nuggetsToSend = [];     
 	var promise = Parse.Promise.as();
 	promise = promise.then(function() {
@@ -112,8 +117,10 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 
 	    var arrayOfQueries = [onedayQuery, oneweekQuery, twoweeksQuery, onemonthQuery, threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery]; // threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery];
 		var nuggets_user_query = Parse.Query.or.apply(Parse.Query, arrayOfQueries); 
-        console.log("running nugget_user query...")
+        //console.log("running nugget_user query...");
         return nuggets_user_query.each(function(nugget_user){
+           try
+           {
 	       var nugget = nugget_user.get("nugget");
 	       return nugget.fetch({
 					  	success: function(nugget) {
@@ -124,39 +131,71 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 					    console.log(error);
 					  }
 					});
+	   		}
+	   		catch(err)
+	   		{
+	   			console.log(err);
+
+	   		}
         });		
 
     }).then(function() {
     	
     	if(nuggetsToSend.length > 0)
         {
+        	emailSentCount++;
         	var nuggetsReminderText = "Good Morning, " + user.get("displayname") + "!\n\nHere are your nuggets for the day: \n\n";
+        	var htmlNuggetsReminderText = "<p>Good Morning, " + user.get("displayname") + "!";
+
 
 			for(i=0; i< nuggetsToSend.length; i++)
 	        {
-	        	var count = i + 1;
-	        	url = nuggetsToSend[i].get("url");
-	        	url.trim(); 
-	        	if(url.length > 0)
+	        	try
 	        	{
-	        		url = " (" + url + ")";
-	        	}
-				nuggetsReminderText = nuggetsReminderText + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+		        	var count = i + 1;
+		        	url = nuggetsToSend[i].get("url");
+		        	if (typeof url == "string")
+		        	{
+			        	if(url.length > 0)
+			        	{
+			        		url.trim();
+			        		url = " (" + url + ")";
+			        	}
+		        	}
+		        	else
+		        	{
+		        		url = ""; 
+		        	}
+					nuggetsReminderText = nuggetsReminderText + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+					htmlNuggetsReminderText += "<br><p>" + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+				}
+				catch(err)
+				{
+					console.log(err);
+				}
 			}
 
-		    nuggetsReminderText += "Have a great day,\nNuggets Team\n\nTo share feedback, questions or unsubscribe, email heynuggetsapp@gmail.com"
-	        console.log("reminder text: " + nuggetsReminderText); 
+		    nuggetsReminderText += "Have a great day,\nNuggets Team\n\nTo share feedback, questions or unsubscribe, email heynuggetsapp@gmail.com";
+		    htmlNuggetsReminderText += "<br><br>" + "Have a great day,<br>Nuggets Team";
 
-	        console.log(user.get("email"));
+
+	        if(emailSentCount > 195)
+	        {
+	        	//console.log(user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
+	    	}
+	        //console.log("reminder text: " + nuggetsReminderText); 
+	        if(emailSentCount%70 == 0)
+	        {
 	        Mailgun.sendEmail({
-				from: 'Nuggets reminder<mailgun@nuggetsapp.com>',
-				to: user.get("email"),
-				subject: 'Your nuggets for the day',
+				from: 'Nuggets Reminder<hello@nuggetsapp.com>',
+				to: "aswath87@gmail.com",//user.get("email"),
+				subject: 'Your Nuggets reminder for the day',
 				text: nuggetsReminderText,
+				html: htmlNuggetsText("Your Nuggets for the Day", escapeString(htmlNuggetsReminderText)),
 			},
 			{
 			  success: function(httpResponse) {
-			    console.log(httpResponse);
+			    //console.log(httpResponse);
 			    //response.success("Email sent!");
 			  },
 			  error: function(httpResponse) {
@@ -164,17 +203,457 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 			    //response.error("Uh oh, something went wrong");
 			  }
 			});
+	    	}
+	        
 		}
     	
         //console.log("DONE HERE");
     });
 
     return promise;
+	}
+
+	catch (err)
+	{
+		console.log(err);
+		return promise;
+	}
 
   })   .then(function() {
     //console.log("leaderBoardStatus complete console log");
+    console.log(emailSentCount + " " + totalUserCount);
+    status.success(emailSentCount + " emails, " + totalUserCount + " users");   },function(error) {
+    console.log(error);
+    status.error("error: " + error);   });
+ 
+});
+
+Parse.Cloud.job("sendEmail", function(request, status) {
+
+  	// initialize mailgun
+  	// initialize mailgun
+    var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
+    
+	var query = new Parse.Query(Parse.User);   // Query for all users  
+	var totalUserCount = 0; 
+	var emailSentCount = 0; 
+	query.each(function(user) {
+	totalUserCount++:
+	try
+	{
+	var nuggetsToSend = [];     
+	var promise = Parse.Promise.as();
+	promise = promise.then(function() {
+        // return a promise that will be resolved 
+        var Nugget_User = Parse.Object.extend("Nugget_User");
+	 	//var nuggets_user_query = new Parse.Query(Nugget_User);
+	    //nuggets_user_query.include("nugget");
+	    //nuggets_user_query.equalTo("user", user); 
+	    var d = new Date();
+		var oneday = (24 * 3600 * 1000);
+		var oneweek = (9 * 24 * 3600 * 1000);
+		var twoweeks = (2 * 7 * 24 * 3600 * 1000);
+		var onemonth = (30 * 24 * 3600 * 1000);
+		var threemonths = (3 * 30 * 24 * 3600 * 1000);
+		var sixmonths = (6 * 30 * 24 * 3600 * 1000);
+		var oneyear = (12 * 30 * 24 * 3600 * 1000);
+		var twoyears = (2 * 12 * 30 * 24 * 3600 * 1000);
+
+		var onedayback = new Date(d.getTime() - oneday);
+		var oneweekback = new Date(d.getTime() - (oneweek));
+		var twoweeksback = new Date(d.getTime() - (twoweeks));
+		var onemonthback = new Date(d.getTime());
+		onemonthback.setMonth(d.getMonth() - 1);
+		var threemonthsback = new Date(d.getTime());
+		threemonthsback.setMonth(d.getMonth() - 3);
+		var sixmonthsback = new Date(d.getTime());
+		sixmonthsback.setMonth(d.getMonth() - 6);
+		var oneyearback = new Date(d.getTime());
+		oneyearback.setMonth(d.getMonth() - 12);
+		var twoyearsback = new Date(d.getTime());
+		twoyearsback.setMonth(d.getMonth() - 24);
+
+	    
+	    var onedayQuery = new Parse.Query(Nugget_User);
+	    //onedayQuery.include("nugget");
+	    onedayQuery.include("nugget");
+	    onedayQuery.notEqualTo("isDeleted", true); 
+	    onedayQuery.greaterThanOrEqualTo("createdAt", onedayback);
+	    onedayQuery.equalTo("user", user);
+
+	    var oneweekQuery = new Parse.Query(Nugget_User);
+	    //oneweekQuery.include("nugget");
+	    oneweekQuery.notEqualTo("isDeleted", true); 
+	    oneweekQuery.include("nugget");
+	    oneweekQuery.greaterThanOrEqualTo("createdAt", oneweekback);
+	    oneweekQuery.lessThan("createdAt", new Date(oneweekback.getTime() + oneday));
+	    oneweekQuery.equalTo("user", user);
+
+	    var twoweeksQuery = new Parse.Query(Nugget_User);
+	    twoweeksQuery.include("nugget");
+	    twoweeksQuery.notEqualTo("isDeleted", true); 
+	    twoweeksQuery.greaterThanOrEqualTo("createdAt", twoweeksback);
+	   	twoweeksQuery.lessThan("createdAt", new Date(twoweeksback.getTime() + oneday));
+	    twoweeksQuery.equalTo("user", user);
+
+	    var onemonthQuery = new Parse.Query(Nugget_User);
+	    onemonthQuery.include("nugget");
+	    onemonthQuery.notEqualTo("isDeleted", true); 
+	    onemonthQuery.greaterThanOrEqualTo("createdAt", onemonthback);
+	    onemonthQuery.lessThan("createdAt", new Date(onemonthback.getTime() + oneday));
+	    onemonthQuery.equalTo("user", user);
+
+	    var threemonthsQuery = new Parse.Query(Nugget_User);
+	    threemonthsQuery.include("nugget");
+	    threemonthsQuery.notEqualTo("isDeleted", true); 
+	    threemonthsQuery.greaterThanOrEqualTo("createdAt", threemonthsback);
+	    threemonthsQuery.lessThan("createdAt", new Date(threemonthsback.getTime() + oneday));
+	    threemonthsQuery.equalTo("user", user);
+
+	    var sixmonthsQuery = new Parse.Query(Nugget_User);
+	    sixmonthsQuery.include("nugget");
+	    sixmonthsQuery.notEqualTo("isDeleted", true); 
+	    sixmonthsQuery.greaterThanOrEqualTo("createdAt", sixmonthsback);
+	    sixmonthsQuery.lessThan("createdAt", new Date(sixmonthsback.getTime() + oneday));
+	    sixmonthsQuery.equalTo("user", user);
+
+	    var oneyearQuery = new Parse.Query(Nugget_User);
+	    oneyearQuery.include("nugget");
+	    oneyearQuery.notEqualTo("isDeleted", true); 
+	    oneyearQuery.greaterThanOrEqualTo("createdAt", oneyearback);
+	    oneyearQuery.lessThan("createdAt", new Date(oneyearback.getTime() + oneday));
+	    oneyearQuery.equalTo("user", user);
+
+	    var twoyearsQuery = new Parse.Query(Nugget_User);
+	    twoyearsQuery.include("nugget");
+	    twoyearsQuery.notEqualTo("isDeleted", true); 
+	    twoyearsQuery.greaterThanOrEqualTo("createdAt", twoyearsback);
+	    twoyearsQuery.lessThan("createdAt", new Date(twoyearsback.getTime() + oneday));
+	    twoyearsQuery.equalTo("user", user);
+
+	    var randmomQuery = new Parse.Query(Nugget_User);
+	    randmomQuery.include("nugget");
+	    randmomQuery.equalTo("user", user);
+	    randmomQuery.limit(1); 
+
+	    var arrayOfQueries = [onedayQuery, oneweekQuery, twoweeksQuery, onemonthQuery, threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery]; // threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery];
+		var nuggets_user_query = Parse.Query.or.apply(Parse.Query, arrayOfQueries); 
+        //console.log("running nugget_user query...");
+        return nuggets_user_query.each(function(nugget_user){
+           try
+           {
+	       var nugget = nugget_user.get("nugget");
+	       return nugget.fetch({
+					  	success: function(nugget) {
+					  	nuggetsToSend.push(nugget);
+				  		},
+					  error: function(nugget, error) {
+					    // The object was not refreshed successfully.
+					    console.log(error);
+					  }
+					});
+	   		}
+	   		catch(err)
+	   		{
+	   			console.log(err);
+
+	   		}
+        });		
+
+    }).then(function() {
+    	
+    	if(nuggetsToSend.length > 0)
+        {
+        	emailSentCount++;
+        	var nuggetsReminderText = "Good Morning, " + user.get("displayname") + "!\n\nHere are your nuggets for the day: \n\n";
+        	var htmlNuggetsReminderText = "<p>Good Morning, " + user.get("displayname") + "!";
+
+			for(i=0; i< nuggetsToSend.length; i++)
+	        {
+	        	try
+	        	{
+		        	var count = i + 1;
+		        	url = nuggetsToSend[i].get("url");
+		        	if (typeof url == "string")
+		        	{
+			        	if(url.length > 0)
+			        	{
+			        		url.trim();
+			        		url = " (" + url + ")";
+			        	}
+		        	}
+		        	else
+		        	{
+		        		url = ""; 
+		        	}
+					nuggetsReminderText = nuggetsReminderText + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+					htmlNuggetsReminderText += "<br><p>" + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+				}
+				catch(err)
+				{
+					console.log(err);
+				}
+			}
+
+		    nuggetsReminderText += "Have a great day,\nNuggets Team\n\nTo share feedback, questions or unsubscribe, email hello@nuggetsapp.com";
+		    htmlNuggetsReminderText += "<br><br>" + "Have a great day,<br>Nuggets Team";
+
+	        if(emailSentCount%10 == 0)
+	        {
+	        	console.log(userCount + " " + user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
+	    	}
+	        //console.log("reminder text: " + nuggetsReminderText); 
+	        
+	        if (true)//userCount%47 == 0)
+	        {
+		        Mailgun.sendEmail({
+					from: 'Nuggets Reminder<hello@nuggetsapp.com>',
+					to: user.get("email"),
+					subject: 'Your Nuggets reminder for the day',
+					text: nuggetsReminderText,
+					html: htmlNuggetsText("Your Nuggets for the Day", escapeString(htmlNuggetsReminderText)),
+				},
+				{
+				  success: function(httpResponse) {
+				    // console.log(httpResponse);
+				    console.log(emailSentCount + " " + totalUserCount);
+    				status.success(emailSentCount + " emails, " + totalUserCount + " users");
+				  },
+				  error: function(httpResponse) {
+				    console.error(httpResponse);
+				    //response.error("Uh oh, something went wrong");
+				  }
+				});
+	   		}
+	    	
+	        
+		}
+    	
+        //console.log("DONE HERE");
+    });
+
+    return promise;
+	}
+
+	catch (err)
+	{
+		console.log(err);
+		return promise;
+	}
+
+  })   .then(function() {
+    //console.log("leaderBoardStatus complete console log");
+    console.log(userCount);
     status.success("Reminder emails sent!");   },function(error) {
-    	console.log(error);
+    console.log(error);
     status.error("Uh oh, someting went wrong");   });
  
 });
+
+function escapeString(myVal)
+{
+	myVal = myVal.replace(/\\/g, '\\\\'); // escape backslashes
+	myVal = myVal.replace(/"/g, '\\"');   // escape quotes
+	return myVal; 
+
+}
+
+Parse.Cloud.job("welcomeEmail", function(request, status) {
+    
+	var query = new Parse.Query(Parse.User);   
+	var d = new Date();
+	var oneday = (6 * 24 * 3600 * 1000);
+	var startTime =  new Date(d.getTime() - oneday);  //new Date(2015, 7, 19, 0, 0, 0, 0);
+	var endTime = new Date(2015, 7, 21, 12,0,0,0);
+	console.log(startTime + " " + endTime);
+	query.greaterThanOrEqualTo("createdAt", startTime);
+	//query.lessThan("createdAt", new Date(endTime.getTime())); 
+	query.limit(2000);
+	var userCount = 0 
+	query.find({
+			success: function(users) {
+			for (index = 0; index < users.length; ++index)
+			{
+				user = users[index]; 
+				try
+				{
+					userCount++;
+					var name = user.get("displayname"); 
+					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
+					htmlEmail = htmlNuggetsText("Welcome to Nuggets, " + name +"!", htmlEmail); 
+
+					if(userCount<4)
+					{
+						sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name, textWelcomeEmail(name), htmlEmail); 
+					}
+				}
+
+				catch(err)
+				{
+					console.log("error welcome: " + err + "\n" + err.stack); 
+				}
+				
+			}
+			status.success("welcome sent to " + users.length + " users.");
+			}, 
+
+			error: function (error) {
+				status.error("error: " + error); 
+			}
+			});
+}); 
+
+function textWelcomeEmail(name)
+{
+	var welcomeEmail = "Hi " + name + "," + 
+"\n\nI am Aswath, the founder of Nuggets. I’m very excited that you have signed up as an early user. We built Nuggets because we are avid learners and it bothered us that we forget 90% of what we learn within a week. Nuggets leverages 2 powerful memory techniques, consolidation and spaced repetition, to help you record and remember everything you learn."+
+"\n\nI'd like to share 2 quick tips to help you make the most of Nuggets.\
+\
+\n\n1. Make it a habit\
+\nRemember to create nuggets as you learn. For the next few days, create one every day; it becomes a rewarding habit soon.\
+\
+\n\n2. Read your reminders\
+\nOur reminder emails are specifically curated and timed to maximize retention. It might help to add hello@nuggetsapp.com to your contact list so that your reminders don’t get lost.\
+\
+\n\nI hope you’ll enjoy using Nuggets. We’d love to hear your feedback, so please drop us a note on the slightest whim.\
+\
+\n\n\“The greatest thing in life is to keep your mind young.\” - Henry Ford\
+\
+\n\nKeep learning,\
+\nAswath and the Nuggets team"; 
+
+return welcomeEmail; 
+}
+
+function htmlWelcomeEmail(name)
+{
+	var welcomeEmail = "<p>Hi " + name + "," +
+"<br><br>I am Aswath, the founder of Nuggets. I’m very excited that you have signed up as an early user. We built Nuggets because we are avid learners and it bothered us that <i>we forget 90% of what we learn within a week</i>. Nuggets leverages 2 powerful techniques, consolidation and spaced repetition, to help you record and remember everything you learn.\
+\
+<br><br>I'd like to share 2 quick tips to help you make the most of Nuggets.\
+\
+<br><br><b>1. Make it a habit</b>\
+<br>Remember to create nuggets as you learn. For the next few days, create one every day; it becomes a rewarding habit soon.\
+\
+<br><br><b>2. Read your reminders</b>\
+<br>Our reminder emails are specifically curated and timed to maximize retention. It might help to add hello@nuggetsapp.com to your contact list so that your reminders don’t get lost.\
+\
+<br><br>I hope you’ll enjoy using Nuggets. We’d love to hear your thoughts and feedback, so please drop us a note on the slightest whim.\
+\
+<br><br>“<i>The greatest thing in life is to keep your mind young.</i>” - Henry Ford\
+\
+<br><br>Keep learning,\
+<br>Aswath and the Nuggets team</p>"; 
+
+return welcomeEmail; 
+}
+
+function sendEmail(from, to, subject, text, html) {
+
+	var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
+	
+	Mailgun.sendEmail({
+					from: from,
+					to: to,
+					subject: subject,
+					text: text,
+					html: html,
+				},
+				{
+				  success: function(httpResponse) {
+				    // console.log(httpResponse);
+				    //response.success("Email sent!");
+				  },
+				  error: function(httpResponse) {
+				    console.error("error send email: " + httpResponse);
+				    //response.error("Uh oh, something went wrong");
+				  }
+				});
+}
+
+function htmlNuggetsText(title, nuggetsText) {
+
+var htmlstring = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">\
+<html xmlns="http://www.w3.org/1999/xhtml" style="font-family: Helvetica, Arial, sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;">\
+<head>\
+<meta name="viewport" content="width=device-width" />\
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />\
+<title>Nuggets</title>\
+<style type="text/css">\
+img {\
+max-width: 100%;\
+}\
+body {\
+-webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em;\
+}\
+body {\
+background-color: #f6f6f6;\
+}\
+@media only screen and (max-width: 640px) {\
+  body {\
+    padding: 0 !important;\
+  }\
+  h1 {\
+    font-weight: 800 !important; margin: 20px 0 5px !important;\
+  }\
+  h2 {\
+    font-weight: 800 !important; margin: 20px 0 5px !important;\
+  }\
+  h3 {\
+    font-weight: 800 !important; margin: 20px 0 5px !important;\
+  }\
+  h4 {\
+    font-weight: 800 !important; margin: 20px 0 5px !important;\
+  }\
+  h1 {\
+    font-size: 22px !important;\
+  }\
+  h2 {\
+    font-size: 18px !important;\
+  }\
+  h3 {\
+    font-size: 16px !important;\
+  }\
+  .container {\
+    padding: 0 !important; width: 100% !important;\
+  }\
+  .content {\
+    padding: 0 !important;\
+  }\
+  .content-wrap {\
+    padding: 10px !important;\
+  }\
+  .invoice {\
+    width: 100% !important;\
+  }\
+}\
+</style>\
+</head>\
+\
+<body itemscope itemtype="http://schema.org/EmailMessage" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; -webkit-font-smoothing: antialiased; -webkit-text-size-adjust: none; width: 100% !important; height: 100%; line-height: 1.6em; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6">\
+<table class="body-wrap" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; background-color: #f6f6f6; margin: 0;" bgcolor="#f6f6f6"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>\
+		<td class="container" width="600" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; display: block !important; max-width: 600px !important; clear: both !important; margin: 0 auto;" valign="top">\
+			<div class="content" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; max-width: 600px; display: block; margin: 0 auto; padding: 20px;">\
+				<table class="main" width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; border-radius: 3px; background-color: #fff; margin: 0; border: 1px solid #e9e9e9;" bgcolor="#fff"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="alert alert-warning" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 16px; vertical-align: top; color: #fff; font-weight: 500; text-align: center; border-radius: 3px 3px 0 0; background-color: #7F00BD; margin: 0; padding: 20px;" align="center" bgcolor="#7F00BD" valign="top">'
+							+ title + 
+						'</td>\
+					</tr><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-wrap" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 20px;" valign="top">\
+							<table width="100%" cellpadding="0" cellspacing="0" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0; padding: 0 0 20px;" valign="top">'
+										+ nuggetsText + 
+										'</table></td>\
+					</tr></table><div class="footer" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; width: 100%; clear: both; color: #999; margin: 0; padding: 20px;">\
+					<table width="100%" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><tr style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; margin: 0;"><td class="aligncenter content-block" style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 12px; vertical-align: top; color: #999; text-align: center; margin: 0; padding: 0 0 20px;" align="center" valign="top">To share feedback, questions or unsubscribe, email hello@nuggetsapp.com</td>\
+						</tr></table></div></div>\
+		</td>\
+		<td style="font-family: Helvetica,Arial,sans-serif; box-sizing: border-box; font-size: 14px; vertical-align: top; margin: 0;" valign="top"></td>\
+	</tr></table></body>\
+</html>'
+
+
+return htmlstring; 
+
+}
+
+
