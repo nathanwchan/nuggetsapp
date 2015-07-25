@@ -255,6 +255,7 @@ p {
         background: rgba(0,0,0,0.1); 
     padding: 2px 5px;
         max-width: 227px;
+        margin-top: 5px; 
 }
 
 .nugget-time-ago {
