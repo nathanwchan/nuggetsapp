@@ -17,6 +17,15 @@ function goToLoginPage()
   window.location.replace('login');
 }
 
+function updateProfileHeader()
+{
+  var user = Parse.User.current(); 
+  var displayname = user.get("displayname"); 
+  var tagline = "super user of Nuggets, avid learner"; 
+  $('#displayname').html(displayname);
+  $('#tagline').html(tagline);
+}
+
 function addHighlightMarkup(text, highlightText)
 {
   var highlightIndex = text.toLowerCase().indexOf(highlightText);
@@ -244,6 +253,7 @@ function validateLogin() {
   }
   else
   {
+    updateProfileHeader(); 
     runQuery();
   }
 }

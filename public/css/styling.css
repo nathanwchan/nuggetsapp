@@ -13,10 +13,45 @@
     margin-right: auto;
 }
 
+
+
+.backgroundOne {
+    background-image: url('background.png');
+    background-repeat: repeat; 
+    opacity: .35;
+    width: 100%; 
+    height: 100%; 
+     position: absolute;
+    z-index: -1;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
 #extension-container {
-    margin-top: 65px;
+    margin-top: 60px;
     text-align: center;
 }
+
+.BoxShadowHelper(@level: 1){
+    & when (@level = 1) {
+        box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    }
+    & when (@level = 2) {
+        box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+    }
+    & when (@level = 3) {
+        box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+    }
+    & when (@level = 4) {
+        box-shadow: 0 14px 28px rgba(0,0,0,0.25), 0 10px 10px rgba(0,0,0,0.22);
+    }
+    & when (@level = 5) {
+        box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    }
+}
+
 
 #g1 {
     background-color: rgb(28, 232, 181); 
@@ -206,8 +241,16 @@ p {
     margin-top:20px;
     padding: 18px;
     background: white;
-    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
-    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+    /* -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07); */
+}
+
+.nugget-wrapper:hover {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+          -webkit-transform: translateY(-5px);
+        -moz-transform: translateY(-5px);
+          transform: translateY(-5px)
 }
 .nugget-source-link
 {
@@ -324,13 +367,69 @@ p {
     background-image: none !important;
 }
 
+.jumbotron {
+    margin-bottom: 5px;
+    background-color: white;
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 40px; 
+    -webkit-box-shadow: inset 2px 2px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  
+}
+
+#login-body {
+    text-align: center;
+}
+
+#login-body .input-append input[class*="span"], .input-append .uneditable-input[class*="span"], .input-prepend input[class*="span"], .input-prepend .uneditable-input[class*="span"], .row-fluid input[class*="span"], .row-fluid select[class*="span"], .row-fluid textarea[class*="span"], .row-fluid .uneditable-input[class*="span"], .row-fluid .input-prepend [class*="span"], .row-fluid .input-append [class*="span"] {
+    display: inline-block;
+    width: 500px;
+    height: 40px;
+}
+
+.navbar .brand
+{
+    margin-top: 4px; 
+}
+
+#my-nuggets-table {
+    margin-top: -10px;
+}
+
 .table td {
     padding: 8px 0 8px 0;
+}
+
+.btn-primary {
+    background-color: #FF6600;
+}
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
+    color: #fff;
+    background-color: #04c;
+}
+
+#login-div {
+    text-align: center;
+}
+
+#login-body [class*="span"] {
+
+    margin-left: 0px; 
+
 }
 
 #login-div select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
 {
     height: 25px;
+}
+
+#register-button {
+    margin-top: 10px; 
+}
+#login-button {
+    margin-top: 10px; 
 }
 
 .btn-lg {
