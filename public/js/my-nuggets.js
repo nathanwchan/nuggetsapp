@@ -48,24 +48,33 @@ function updateMyNuggetsMarkup(results, highlightText)
    var markup_to_push_col2 ='<div class="span3">';
    var markup_to_push_col3 ='<div class="span3">';
    var markup_to_push_col4 ='<div class="span3">';
+   var randomId; 
+   var randomFont; 
   for(i=0;i<results.length;i++)
   {
     var markup_to_push = '';
-    markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper"><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
+    randomId = Math.round(Math.random()*10) + 1;
+    randomFont = Math.round(Math.random()*5) + 1;
+    markup_to_push += '<div class="row-fluid f' + randomFont + '"><div class="nugget-wrapper" id="g'+ randomId +'"><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
     var tags = results[i].tags;
+    
+    markup_to_push += '<div class="nugget-source-section">'; 
+    if (results[i].url && results[i].url != "")
+    {
+      markup_to_push += '<div class = "nugget-source-link" ><a href="' + results[i].url + '">' + addHighlightMarkup(results[i].source, highlightText) + '</a> </div>';
+    }
+    else if (results[i].source != "")
+    {
+      markup_to_push += '<p class="nugget-source">' + addHighlightMarkup(results[i].source, highlightText) + '</p>';
+    }
+    markup_to_push += '</div>'; 
+
+    markup_to_push += '<div class="nugget-tag-section">'; 
     for (j=0;j<tags.length;j++)
     {
       markup_to_push += ' <span class="nugget-tag">' + addHighlightMarkup('#' + tags[j], highlightText) + '</span>';
     }
-    markup_to_push += '</p>'
-    if (results[i].url && results[i].url != "")
-    {
-      markup_to_push += '<p><a href="' + results[i].url + '" class="nugget-source-link">' + addHighlightMarkup(results[i].source, highlightText) + '</a></p>';
-    }
-    else if (results[i].source != "")
-    {
-      markup_to_push += '<p class="gray">' + addHighlightMarkup(results[i].source, highlightText) + '</p>';
-    }
+    markup_to_push += '</div>'; 
     var timeAgo = moment(results[i].updatedAt).fromNow();
     if (moment().diff(results[i].updatedAt) < 0)  // Parse seems to set updatedAt a couple seconds into the future, so preventing the time-ago tag from saying "in a few seconds"
     {

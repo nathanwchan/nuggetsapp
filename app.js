@@ -122,10 +122,12 @@ function updateMyNuggetsMarkup(results, highlightText)
    var markup_to_push_col2 ='<div class="span3">';
    var markup_to_push_col3 ='<div class="span3">';
    var markup_to_push_col4 ='<div class="span3">';
+  
   for(i=0;i<results.length;i++)
   {
-    var markup_to_push = '';
-    markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper"><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
+    Math.round(Math.random()*10) + 1;
+    var randomId = Math.round(Math.random()*10) + 1; 
+    markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper" id="' + randomId + '" ><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
     var tags = results[i].tags;
     for (j=0;j<tags.length;j++)
     {

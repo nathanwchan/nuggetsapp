@@ -3,7 +3,7 @@
     min-height: 280px;
     max-height: 450px;
     height: 280px;
-    background-color: #F4F4F4;
+    background-color: #e8e8e8;
     padding: 0 30px 30px 30px;
 }
 
@@ -18,6 +18,74 @@
     text-align: center;
 }
 
+#g1 {
+    background-color: rgb(28, 232, 181); 
+}
+
+#g2 {
+    background-color: rgb(149, 214, 65); 
+}
+
+#g4 {
+    background-color: rgb(255, 218, 0); 
+}
+
+#g5 {
+    background-color: rgb(255, 155, 0); 
+}
+
+#g6 {
+    background-color: rgb(63, 195, 255); 
+}
+
+#g7 {
+    background-color: rgb(255, 109, 63); 
+}
+
+#g8 {
+    background-color: rgb(28, 232, 181); 
+}
+
+.f1 {
+      font-size: 24px;
+  font-weight: 300;
+  line-height: 36px;
+    font-family: 'Roboto Slab','Times New Roman',serif; 
+}
+
+.f2 {
+    font-size: 16px; 
+    line-height: 22px; 
+    font-family: 'Roboto Slab','Times New Roman',serif; 
+}
+
+.f3 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    font-family: 'Roboto Slab','Times New Roman',serif; 
+}
+
+.f4 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    font-family: 'Roboto Slab','Times New Roman',serif; 
+}
+
+.f5 {
+    font-size: 18px;
+    font-weight: 300;
+    line-height: 28px;
+    font-family: 'Roboto Slab','Times New Roman',serif; 
+}
+
+.f6 {
+    font-size: 36px;
+  font-weight: 100;
+  line-height: 48px;
+  font-family: 'Roboto Slab','Times New Roman',serif; 
+}
 .navbar-inner {
     padding-left: 40px !important;
     padding-right: 40px !important;
@@ -25,6 +93,7 @@
 
 .navbar-icon {
     margin: 8px 10px 0px -11px;
+    width: 26px; 
 }
 
 .navbar-dropdown {
@@ -119,17 +188,45 @@ p {
     margin-right:auto;
 }
 
+.nugget-source {
+
+    font-size: 11px; 
+    line-height: 12px; 
+    margin-top:5px; 
+    text-overflow: ellipsis;
+    width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
 .nugget-wrapper {
     position: relative;
     margin-bottom: -10px;
     margin-top:20px;
     padding: 18px;
     background: white;
-    box-shadow: 0 1px 0 #D0D0D0;
+    -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+    box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
+}
+.nugget-source-link
+{
+    margin-top: 5px;
+    font-size: 10px;
+    line-height: 12px; 
+    width: 250px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-align: center;
 }
 
+.nugget-source-link a {
+        color: #15c;
+        text-decoration: underline;
+}
 .nugget-wrapper a {
-    font-size: 10px;
+    font-size: 12px;
+    line-height: 12px; 
 }
 
 .col1 {
@@ -140,10 +237,24 @@ p {
     margin-right: 10px;
 }
 
+.nugget-tag-section {
+    text-align: right; 
+        font-family: 'Roboto','Droid Sans',arial,sans-serif;
+    font-size: 11px;
+    line-height: 14px;
+    color: rgba(0,0,0,0.7);
+}
+
+.nugget-source-section {
+    display: none;
+    margin: 5px 0 25px 0; 
+    line-height: 10px; 
+}
+
 .nugget-tag {
-    color: gray;
-    font-weight: 600;
-    font-size: 10px;
+        background: rgba(0,0,0,0.1); 
+    padding: 2px 5px;
+        max-width: 227px;
 }
 
 .nugget-time-ago {
