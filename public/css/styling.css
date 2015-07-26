@@ -240,7 +240,6 @@ p {
     position: relative;
     margin-bottom: -10px;
     margin-top:20px;
-    padding: 18px;
     background: white;
     box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
     /* -webkit-box-shadow: inset 1px 1px 0 rgba(0,0,0,.1),inset 0 -1px 0 rgba(0,0,0,.07);
@@ -251,7 +250,15 @@ p {
     box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
           -webkit-transform: translateY(-5px);
         -moz-transform: translateY(-5px);
-          transform: translateY(-5px)
+          transform: translateY(-5px); 
+
+}
+
+.nugget-wrapper:hover .nugget-toolbar
+{
+     width: 100%;
+    opacity: 1;
+    
 }
 .nugget-source-link
 {
@@ -307,15 +314,12 @@ p {
     font-weight: 200;
 }
 
-.nugget-action-icons {
-    position: absolute;
-    bottom: 0;
-    right: 0;
-}
 
 .nugget-action-icon {
     cursor: pointer;
-    margin-left: -15px;
+    margin-left: 15px;
+    height: 20px; 
+    width: 20px;
 }
 
 #my-nuggets-search-div {
@@ -421,6 +425,62 @@ p {
     margin-left: 0px; 
 
 }
+
+.nugget-wrapper {
+}
+
+.nugget-action-icons 
+{ 
+    clear: both;
+    vertical-align: middle;
+    position: relative;
+  top: 20%;
+  transform: translateY(-50%);
+
+    
+}
+
+.nugget-action-icons a
+{ 
+   text-decoration: none; 
+   font-size: inherit;
+
+    
+}
+
+.nugget-action-icons-right {
+    float:right;
+}
+
+.nugget-action-icons-left {
+   float:left;
+
+}
+
+.nugget-content {
+    padding: 18px; 
+    text-align: left; 
+}
+
+.nugget-toolbar
+{
+    color: rgba(0,0,0,0.5);
+    font-size: 20px;
+    bottom: 0;
+    opacity: 0;
+    padding: 4px 0;
+    position: relative;
+    -webkit-transition-duration: .218s;
+    transition-duration: .218s;
+    -webkit-transition-property: opacity;
+    transition-property: opacity;
+    -webkit-transition-timing-function: ease-in;
+    transition-timing-function: ease-in;
+        background-color: rgba(0,0,0,.2);
+    height: 34px;
+}
+
+
 
 #login-div select, textarea, input[type="text"], input[type="password"], input[type="datetime"], input[type="datetime-local"], input[type="date"], input[type="month"], input[type="time"], input[type="week"], input[type="number"], input[type="email"], input[type="url"], input[type="search"], input[type="tel"], input[type="color"], .uneditable-input
 {
