@@ -22,7 +22,6 @@ function updateProfileHeader()
   var user = Parse.User.current(); 
 
   var displayname = user.get("displayname"); 
-  alert(displayname); 
   var tagline = "super user of Nuggets, avid learner"; 
   $('#displayname').html(displayname);
   $('#tagline').html(tagline);
