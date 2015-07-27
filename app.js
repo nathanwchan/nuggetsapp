@@ -2,6 +2,8 @@
 /**
  * Module dependencies.
  */
+ var expressControllers = require('express-controller');
+ var erc = require("express-route-controller"); 
 
 var express = require('express');
 var routes = require('./routes');
@@ -30,8 +32,10 @@ if ('development' == app.get('env')) {
   app.use(express.errorHandler());
 }
 
+
+
 app.get('/', routes.index);
-app.get('/users', user.list);
+//app.get('/users', user.list);
 app.get('/login/:id?', function(req, res) {
     res.render('login', {
         title: 'New Employee'
@@ -54,9 +58,8 @@ app.get('/my-nuggets', function(req, res) {
 app.get('/welcome', function(req, res) {
     res.render('welcome');
 });
-app.get('/nuggets/:id', function(req, res) {
-    
-    res.render('shownuggets');
+app.get('/howtostartastartup', function(req, res) {
+      res.render('howtostart');
 });
 
 http.createServer(app).listen(app.get('port'), function(){
@@ -69,6 +72,15 @@ var NUGGETS_FILTER_TYPE = {
   CUR_USER:2
 };
 
+
+ 
+//Your express-app 
+var app = express();
+ 
+//Tell expressControllers to use the controllers-directory, and use bind() to set up routing. 
+
+
+/*
 function runQuery(nuggets_filter_type, filter)
 {
   var Parse = ParseClass.initialize("F1fRCfIIYQzvft22ckZd5CdrOzhVecTXkwfgWflN", "DUoWr9lIjQME2MmqgMApFmWFdzMcl7B6mKfj8AAc");
@@ -168,5 +180,5 @@ function updateMyNuggetsMarkup(results, highlightText)
   my_nuggets_markup.push(markup_to_push_col4);
   return my_nuggets_markup;
   //$('#my-nuggets-table').html(my_nuggets_markup.join(''));
-}
+}*/
 

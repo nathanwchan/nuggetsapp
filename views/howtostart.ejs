@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Nuggets</title>
+    <link rel="icon" type="image/x-icon" href="/img/nuggets_logo_notext.png">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/styling.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <script type="text/javascript" src="js/jquery-1.10.1.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.js"></script>
+    <script type="text/javascript" src="js/parse-1.2.8.min.js"></script>
+    <script type="text/javascript" src="js/moment.min.js"></script>
+    <script type="text/javascript" src="js/topic.js"></script>
+  </head>
+  <body id="extension-body">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <img src="/img/nuggets_logo_notext.png" class="pull-left navbar-icon"/>
+        <span class="brand">Topic</span>
+        <div class="navbar-dropdown">
+          <div class="btn-group pull-right">
+            <button class="btn btn-small dropdown-toggle" data-toggle="dropdown" tabindex="-1"><i class="icon-th-list"></i></button>
+            <ul class="dropdown-menu pull-right">
+              <!--<li><a href="create">Create a nugget</a></li>
+              <li class="divider"></li>
+              <li><a id="logout-button" href="#">Logout</a></li>-->
+            </ul>
+          </div>
+        </div>
+        <div id="my-nuggets-search-div" class="pull-right" style="display: none;">
+            <div class="span4">
+              
+                <span id="my-nuggets-search-icon"><i class="icon-search"></i></span>
+                <input id="my-nuggets-search" type="text" placeholder="Search"/>
+                <span id="my-nuggets-search-clear"><i class="icon-remove"></i></span>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <div id="extension-container">
+          <div id="my-nuggets-search-div" class="row-fluid" style="display: none;">
+            <div class="span4 offset4">
+              
+                <span id="my-nuggets-search-icon"><i class="icon-search"></i></span>
+                <input id="my-nuggets-search" type="text" placeholder="Search"/>
+                <span id="my-nuggets-search-clear"><i class="icon-remove"></i></span>
+            
+            </div>
+          </div>
+            <div class="row-fluid">
+            <div id="profile-header" class="">
+              <div class="jumbotron">
+                <div class ="backgroundOne"> </div>
+                <h1><span id ="displayname">Your Nuggets</span></h1>
+                <p><span id="tagline">learn, consolidate, remember</span></p>
+              </div>
+            </div>
+            <div id="my-nuggets-table" class="">
+            </div>
+            </div>
+    </div>
+  </body>
+</html>
+

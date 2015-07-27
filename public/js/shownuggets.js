@@ -17,6 +17,16 @@ function goToLoginPage()
   window.location.replace('login');
 }
 
+function updateProfileHeader()
+{
+  var user = Parse.User.current(); 
+
+  var displayname = user.get("displayname"); 
+  var tagline = "super user of Nuggets, avid learner"; 
+  $('#displayname').html(displayname);
+  $('#tagline').html(tagline);
+}
+
 function addHighlightMarkup(text, highlightText)
 {
   var highlightIndex = text.toLowerCase().indexOf(highlightText);
@@ -55,7 +65,7 @@ function updateMyNuggetsMarkup(results, highlightText)
     var markup_to_push = '';
     randomId = Math.round(Math.random()*10) + 1;
     randomFont = Math.round(Math.random()*5) + 1;
-    markup_to_push += '<div class="row-fluid f' + randomFont + '"><div class="nugget-wrapper" id="g'+ randomId +'"><div id="' + results[i].id + '" class=""><p>' + addHighlightMarkup(results[i].text, highlightText);
+    markup_to_push += '<div class="row-fluid f' + randomFont + '"><div class="nugget-wrapper" id="g'+ randomId +'"><div id="' + results[i].id + '" class="nugget-content"><p>' + addHighlightMarkup(results[i].text, highlightText);
     var tags = results[i].tags;
     
     markup_to_push += '<div class="nugget-source-section">'; 
@@ -81,8 +91,9 @@ function updateMyNuggetsMarkup(results, highlightText)
       timeAgo = moment().fromNow();
     }
     markup_to_push += '<div class="row-fluid"><span class="nugget-time-ago">' + timeAgo + '</span>';
-    markup_to_push += '<span class="span1 pull-right nugget-action-icons" style="display: none;"><i class="icon-trash nugget-action-icon"></i></span>';
-    markup_to_push += '</div></div></div></div>';
+    markup_to_push += '</div></div>';
+    markup_to_push += '<div class ="nugget-toolbar"> <span class="span1 fa nugget-action-icons"><span class = "nugget-action-icons-left"><a class="fa-link nugget-action-icon" style="color:white" target="_blank" href="' + results[i].url + '">' + '</a><a class="fa-twitter nugget-action-icon" style="color:white" target="_blank" href="' + twitterUrl(results[i]) + '""></a></span><span class="nugget-action-icons-right"></span></span></div>';
+    markup_to_push += '</div></div>';
     if(i%4 == 0) {
       markup_to_push_col1 += markup_to_push;
     }
@@ -100,6 +111,40 @@ function updateMyNuggetsMarkup(results, highlightText)
   my_nuggets_markup.push(markup_to_push_col3);
   my_nuggets_markup.push(markup_to_push_col4);
   $('#my-nuggets-table').html(my_nuggets_markup.join(''));
+}
+
+function socialPost(nugget, isfb)
+{
+  if(!isfb)
+  {
+    var content = nugget.text; 
+    var url = nugget.url; 
+    var limit = 90; 
+    if(url.length == 0) limit = 110; 
+    if(content.length > limit) 
+    {
+      content = content.substring(0,limit);
+      content += "... ";
+    }
+  
+  }
+    
+  return content + url + " via @nuggetsapp"; 
+  
+  
+}
+
+function twitterUrl(nugget)
+{
+  // ßalert(socialPost(nugget, false)); 
+  return "https://twitter.com/intent/tweet?text=" + socialPost(nugget, false); 
+}
+
+
+function facebookUrl(nugget)
+{
+  var appId = "1622775527965531"; 
+  return "https://www.facebook.com/dialog/share?app_id=" + appId + "&display=popup&href=" + socialPost(nugget, true) + "&redirect_uri=" + window.location.href;
 }
 
 
