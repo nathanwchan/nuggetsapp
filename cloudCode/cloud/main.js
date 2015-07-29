@@ -20,6 +20,7 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 	totalUserCount++; 
 	try
 	{
+
 	var nuggetsToSend = [];     
 	var promise = Parse.Promise.as();
 	promise = promise.then(function() {
@@ -128,13 +129,13 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 				  		},
 					  error: function(nugget, error) {
 					    // The object was not refreshed successfully.
-					    console.log(error);
+					    console.log("error fetching a  nugget " + user.get("email") + " " + nugget.id + " " + error);
 					  }
 					});
 	   		}
 	   		catch(err)
 	   		{
-	   			console.log(err);
+	   			console.log("error fetching nugget from nugget_user: " + err);
 
 	   		}
         });		
@@ -142,11 +143,15 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
     }).then(function() {
     	
     	if(nuggetsToSend.length > 0)
-        {
+        {        	
+        	if(emailSentCount > 30) console.log(user.get("displayname"));
+
         	emailSentCount++;
         	var nuggetsReminderText = "Good Morning, " + user.get("displayname") + "!\n\nHere are your nuggets for the day: \n\n";
         	var htmlNuggetsReminderText = "<p>Good Morning, " + user.get("displayname") + "!";
+        	if(emailSentCount > 30) console.log("got name stuff");
 
+        	
 
 			for(i=0; i< nuggetsToSend.length; i++)
 	        {
@@ -171,7 +176,7 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 				}
 				catch(err)
 				{
-					console.log(err);
+					console.log("error populating nugget email text with nuggets: " + err);
 				}
 			}
 
@@ -239,7 +244,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 	var totalUserCount = 0; 
 	var emailSentCount = 0; 
 	query.each(function(user) {
-	totalUserCount++:
+	totalUserCount++;
 	try
 	{
 	var nuggetsToSend = [];     
@@ -252,7 +257,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 	    //nuggets_user_query.equalTo("user", user); 
 	    var d = new Date();
 		var oneday = (24 * 3600 * 1000);
-		var oneweek = (9 * 24 * 3600 * 1000);
+		var oneweek = (7 * 24 * 3600 * 1000);
 		var twoweeks = (2 * 7 * 24 * 3600 * 1000);
 		var onemonth = (30 * 24 * 3600 * 1000);
 		var threemonths = (3 * 30 * 24 * 3600 * 1000);
@@ -276,14 +281,12 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 
 	    
 	    var onedayQuery = new Parse.Query(Nugget_User);
-	    //onedayQuery.include("nugget");
 	    onedayQuery.include("nugget");
 	    onedayQuery.notEqualTo("isDeleted", true); 
 	    onedayQuery.greaterThanOrEqualTo("createdAt", onedayback);
 	    onedayQuery.equalTo("user", user);
 
 	    var oneweekQuery = new Parse.Query(Nugget_User);
-	    //oneweekQuery.include("nugget");
 	    oneweekQuery.notEqualTo("isDeleted", true); 
 	    oneweekQuery.include("nugget");
 	    oneweekQuery.greaterThanOrEqualTo("createdAt", oneweekback);
@@ -350,13 +353,13 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 				  		},
 					  error: function(nugget, error) {
 					    // The object was not refreshed successfully.
-					    console.log(error);
+					    console.log("error fetching a  nugget " + user.get("email") + " " + nugget.id + " " + error);
 					  }
 					});
 	   		}
 	   		catch(err)
 	   		{
-	   			console.log(err);
+	   			console.log("error fetching a  nugget part2: " + user.get("email") + " " + nugget.id + " " + error);
 
 	   		}
         });		
@@ -365,10 +368,10 @@ Parse.Cloud.job("sendEmail", function(request, status) {
     	
     	if(nuggetsToSend.length > 0)
         {
-        	emailSentCount++;
+        	
         	var nuggetsReminderText = "Good Morning, " + user.get("displayname") + "!\n\nHere are your nuggets for the day: \n\n";
         	var htmlNuggetsReminderText = "<p>Good Morning, " + user.get("displayname") + "!";
-
+        	var htmlUrl = ""; 
 			for(i=0; i< nuggetsToSend.length; i++)
 	        {
 	        	try
@@ -380,6 +383,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 			        	if(url.length > 0)
 			        	{
 			        		url.trim();
+			        		htmlUrl = " (<a href = '" + url + "'>" + "source" + "</a>)"; 
 			        		url = " (" + url + ")";
 			        	}
 		        	}
@@ -388,11 +392,11 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 		        		url = ""; 
 		        	}
 					nuggetsReminderText = nuggetsReminderText + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
-					htmlNuggetsReminderText += "<br><p>" + count + ". " + nuggetsToSend[i].get("text") + url + "\n\n";
+					htmlNuggetsReminderText += "<br><p>" + count + ". " + nuggetsToSend[i].get("text") + htmlUrl;
 				}
 				catch(err)
 				{
-					console.log(err);
+					console.log("error populating nugget email text " + user.get("email") + " " + error);
 				}
 			}
 
@@ -401,11 +405,11 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 
 	        if(emailSentCount%10 == 0)
 	        {
-	        	console.log(userCount + " " + user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
+	        	console.log(totalUserCount + " " + user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
 	    	}
 	        //console.log("reminder text: " + nuggetsReminderText); 
 	        
-	        if (true)//userCount%47 == 0)
+	        if (true)
 	        {
 		        Mailgun.sendEmail({
 					from: 'Nuggets Reminder<hello@nuggetsapp.com>',
@@ -416,12 +420,11 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 				},
 				{
 				  success: function(httpResponse) {
+				  	emailSentCount++;
 				    // console.log(httpResponse);
-				    console.log(emailSentCount + " " + totalUserCount);
-    				status.success(emailSentCount + " emails, " + totalUserCount + " users");
 				  },
 				  error: function(httpResponse) {
-				    console.error(httpResponse);
+				    console.error("error sending email: " + user.get("email") + ": " + httpResponse);
 				    //response.error("Uh oh, something went wrong");
 				  }
 				});
@@ -444,10 +447,9 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 
   })   .then(function() {
     //console.log("leaderBoardStatus complete console log");
-    console.log(userCount);
-    status.success("Reminder emails sent!");   },function(error) {
+    status.success(emailSentCount + " emails, " + totalUserCount + " users");  },function(error) {
     console.log(error);
-    status.error("Uh oh, someting went wrong");   });
+    status.error("error in last " + emailSentCount);   });
  
 });
 
@@ -460,33 +462,152 @@ function escapeString(myVal)
 }
 
 Parse.Cloud.job("welcomeEmail", function(request, status) {
-    
+
 	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
-	var oneday = (6 * 24 * 3600 * 1000);
-	var startTime =  new Date(d.getTime() - oneday);  //new Date(2015, 7, 19, 0, 0, 0, 0);
-	var endTime = new Date(2015, 7, 21, 12,0,0,0);
+	var oneday = (24 * 3600 * 1000);
+	var onedayDelayed = (24 * 3600 * 1000);
+	var startTime = new Date(d.getTime() - 7 * onedayDelayed);
+	var endTime = new Date(d.getTime() - 6 * oneday);
 	console.log(startTime + " " + endTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
-	//query.lessThan("createdAt", new Date(endTime.getTime())); 
-	query.limit(2000);
-	var userCount = 0 
+	query.lessThan("createdAt", endTime); 
+	query.limit(1000);
+	var userCount = 0; 
+	var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
+	query.find({
+		success: function (users) {
+
+
+			for (index = 0; index < users.length; ++index)
+			{
+				userCount++; 
+				user = users[index]; 
+				try
+				{
+					
+					var name = user.get("displayname"); 
+					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
+					htmlEmail = htmlNuggetsText("Welcome to Nuggets, " + name +"!", htmlEmail); 
+					var textEmail = textWelcomeEmail(name); 
+					
+
+					if(userCount%5 ==0)
+					{
+						sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Do you remember what you learned last month?", textEmail, htmlEmail); 
+						console.log(name);
+						
+						/*
+						Mailgun.sendEmail({
+										from: "Nuggets <hello@nuggetsapp.com>",
+										to: user.get("email"),
+										subject: "Welcome to Nuggets, " + name,
+										text: textEmail,
+										html: htmlEmail,
+									},
+									{
+									  success: function(httpResponse) {
+									    // console.log(httpResponse);
+									    //response.success("Email sent!");
+									    if(index%10 == 0) 
+									    	{console.log(name + " " + index); }
+									    userCount++;
+									  },
+									  error: function(httpResponse) {
+									    console.error("error send email: " + httpResponse);
+									    //response.error("Uh oh, something went wrong");
+									  }
+									});
+
+						setTimeout(function(){}, 200); */
+						
+					}
+
+				}
+
+				catch(err)
+				{
+					console.log("error welcome: " + err + "\n" + err.stack); 
+
+				}
+				
+			}
+
+			status.success(userCount + " welcome emails sent.")
+			}, error: function() {
+
+				console,log("error user query failed");
+				status.error("welcome email failde"); 
+
+			} 
+
+
+		}); 
+
+
+});
+
+Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
+    
+    console.log("starting welcome email"); 
+	var query = new Parse.Query(Parse.User);   
+	var d = new Date();
+	var oneday = (24 * 3600 * 1000);
+	var onedayDelayed = (24 * 3600 * 1000);
+	var startTime = new Date(d.getTime() - 7 * onedayDelayed);
+	var endTime = new Date(d.getTime() - 6 * oneday);
+	console.log(startTime + " " + endTime);
+	query.greaterThanOrEqualTo("createdAt", startTime);
+	query.lessThan("createdAt", endTime); 
+	query.limit(1000);
+	var userCount = 0; 
+	var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
 	query.find({
 			success: function(users) {
 			for (index = 0; index < users.length; ++index)
 			{
+				userCount++; 
 				user = users[index]; 
 				try
 				{
-					userCount++;
+					
 					var name = user.get("displayname"); 
 					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
 					htmlEmail = htmlNuggetsText("Welcome to Nuggets, " + name +"!", htmlEmail); 
+					var textEmail = textWelcomeEmail(name)
 
-					if(userCount<4)
+					if(true)
 					{
-						sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name, textWelcomeEmail(name), htmlEmail); 
+						//sendEmail("Nuggets <hello@nuggetsapp.com>", user.get("email"), "Welcome to Nuggets, " + name, textWelcomeEmail(name), htmlEmail); 
+						
+						/*
+						Mailgun.sendEmail({
+										from: "Nuggets <hello@nuggetsapp.com>",
+										to: user.get("email"),
+										subject: "Welcome to Nuggets, " + name,
+										text: textEmail,
+										html: htmlEmail,
+									},
+									{
+									  success: function(httpResponse) {
+									    // console.log(httpResponse);
+									    //response.success("Email sent!");
+									    if(index%10 == 0) 
+									    	{console.log(name + " " + index); }
+									    userCount++;
+									  },
+									  error: function(httpResponse) {
+									    console.error("error send email: " + httpResponse);
+									    //response.error("Uh oh, something went wrong");
+									  }
+									});
+
+						setTimeout(function(){}, 200); */
+						
 					}
+
 				}
 
 				catch(err)
@@ -495,23 +616,155 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 				}
 				
 			}
-			status.success("welcome sent to " + users.length + " users.");
-			}, 
+			}, error: function() {
 
-			error: function (error) {
-				status.error("error: " + error); 
-			}
-			});
+				console,log("error user query failed");
+
+			} 
+
+			}).then(function() {
+		    //console.log("leaderBoardStatus complete console log");
+		    status.success(userCount + " emails");  },function(error) {
+		    console.log(error);
+		    status.error("error in last " + userCount);   
+			}); 
+
 }); 
+
+Parse.Cloud.job("metrics", function(request, status) {
+
+  	// initialize mailgun
+  	// initialize mailgun
+    var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
+    
+	var query = new Parse.Query(Parse.User);   // Query for all users  
+	var totalUserCount = 0;
+	var superUserCount = 0; 
+	var enthuUserCount = 0; 
+	var tryingUserCount = 0; 
+	var noobUser = 0;
+	var oneNuggetUser = 0; 
+	var zeroUser = 0;
+
+	query.each(function(user) {
+	totalUserCount++; 
+
+	try
+	{
+
+	var nuggetsToSend = [];     
+	var promise = Parse.Promise.as();
+	promise = promise.then(function() {
+        // return a promise that will be resolved 
+        var Nugget_User = Parse.Object.extend("Nugget_User");
+
+	    
+	    var onedayQuery = new Parse.Query(Nugget_User);
+	    //onedayQuery.include("nugget");
+	    onedayQuery.include("nugget");
+	    onedayQuery.notEqualTo("isDeleted", true); 
+	    onedayQuery.equalTo("user", user);
+
+	    var oneweekQuery = new Parse.Query(Nugget_User);
+	    //oneweekQuery.include("nugget");
+	    oneweekQuery.notEqualTo("isDeleted", true); 
+	    oneweekQuery.include("nugget");
+	    oneweekQuery.equalTo("user", user);
+
+
+	    var arrayOfQueries = [onedayQuery, oneweekQuery]; // threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery];
+		var nuggets_user_query = Parse.Query.or.apply(Parse.Query, arrayOfQueries); 
+        //console.log("running nugget_user query...");
+        return nuggets_user_query.each(function(nugget_user){
+           try
+           {
+	       var nugget = nugget_user.get("nugget");
+	       nuggetsToSend.push(nugget);
+	       /*
+	       return nugget.fetch({
+					  	success: function(nugget) {
+					  	nuggetsToSend.push(nugget);
+				  		},
+					  error: function(nugget, error) {
+					    // The object was not refreshed successfully.
+					    console.log("error fetching a  nugget " + user.get("email") + " " + nugget.id + " " + error);
+					  }
+					});
+*/
+	   		}
+	   		catch(err)
+	   		{
+	   			console.log("error fetching nugget from nugget_user: " + err);
+
+	   		}
+        });		
+
+    }).then(function() {
+
+    	
+    	if(nuggetsToSend.length >= 20)
+        {        	
+        	console.log("su: " + user.get("displayname") + " " + nuggetsToSend.length);
+        	superUserCount++; 
+	        
+		}
+		else if (nuggetsToSend.length >= 15)
+		{
+			console.log("eu: " + user.get("displayname")+ " " + nuggetsToSend.length);
+        	enthuUserCount++; 
+
+		}
+		else if (nuggetsToSend.length >= 6)
+		{
+			console.log("tu: " + user.get("displayname")+ " " + nuggetsToSend.length);
+        	tryingUserCount++; 
+
+		}
+		else if (nuggetsToSend.length >= 2)
+		{
+			noobUser++; 
+		}
+		else if (nuggetsToSend.length == 1)
+		{
+			oneNuggetUser++; 
+		}
+		else if(nuggetsToSend.length ==0)
+		{
+			zeroUser++;
+
+		}
+    	
+        //console.log("DONE HERE");
+    });
+
+    return promise;
+	}
+
+	catch (err)
+	{
+		console.log(err);
+		return promise;
+	}
+
+  })   .then(function() {
+    //console.log("leaderBoardStatus complete console log");
+    console.log(totalUserCount + " users, " + superUserCount + " super users >2-, " + enthuUserCount+ " enthu Users >15, " + tryingUserCount + " trying Users (>6), " + noobUser + " noob User (2-6), " + oneNuggetUser + " one nugget users 1, " + zeroUser + " zero users" );
+    status.success(totalUserCount + " users, ");   },function(error) {
+    console.log(error);
+    status.error("error: " + error);   });
+ 
+});
 
 function textWelcomeEmail(name)
 {
 	var welcomeEmail = "Hi " + name + "," + 
-"\n\nI am Aswath, the founder of Nuggets. I’m very excited that you have signed up as an early user. We built Nuggets because we are avid learners and it bothered us that we forget 90% of what we learn within a week. Nuggets leverages 2 powerful memory techniques, consolidation and spaced repetition, to help you record and remember everything you learn."+
-"\n\nI'd like to share 2 quick tips to help you make the most of Nuggets.\
+"\n\nDo you remember what you learned last week?" +
+"\n\nI am Aswath, the founder of Nuggets. I’m very excited that you welcome you aboard. We built Nuggets because we are avid learners and it bothered us that we forget 90% of what we learn within a week. Nuggets leverages 2 powerful memory techniques, consolidation and spaced repetition, to help you record and remember everything you learn."+
+"\n\nHere are 2 quick tips to help you make the most of Nuggets.\
 \
 \n\n1. Make it a habit\
-\nRemember to create nuggets as you learn. For the next few days, create one every day; it becomes a rewarding habit soon.\
+\nRemember to create nuggets as you learn. For the next ten days, create one every day; it becomes a rewarding habit soon.\
 \
 \n\n2. Read your reminders\
 \nOur reminder emails are specifically curated and timed to maximize retention. It might help to add hello@nuggetsapp.com to your contact list so that your reminders don’t get lost.\
@@ -529,12 +782,13 @@ return welcomeEmail;
 function htmlWelcomeEmail(name)
 {
 	var welcomeEmail = "<p>Hi " + name + "," +
-"<br><br>I am Aswath, the founder of Nuggets. I’m very excited that you have signed up as an early user. We built Nuggets because we are avid learners and it bothered us that <i>we forget 90% of what we learn within a week</i>. Nuggets leverages 2 powerful techniques, consolidation and spaced repetition, to help you record and remember everything you learn.\
+"<br><p style='text-align:center'>Do you remember what you learnt last week?</p>" + 
+"<br><br>I am Aswath, the founder of Nuggets. I’m very excited to welcome you aboard. We built Nuggets because we are avid learners and it bothered us that <i><b>we forget 90% of what we learn within a week</b></i>. Nuggets leverages 2 powerful techniques, consolidation and spaced repetition, to help you record and remember everything you learn.\
 \
-<br><br>I'd like to share 2 quick tips to help you make the most of Nuggets.\
+<br><br>Here are 2 quick tips to help you make the most of Nuggets.\
 \
 <br><br><b>1. Make it a habit</b>\
-<br>Remember to create nuggets as you learn. For the next few days, create one every day; it becomes a rewarding habit soon.\
+<br>Remember to create nuggets as you learn. For the next ten days, create one every day; it becomes a rewarding habit soon.\
 \
 <br><br><b>2. Read your reminders</b>\
 <br>Our reminder emails are specifically curated and timed to maximize retention. It might help to add hello@nuggetsapp.com to your contact list so that your reminders don’t get lost.\

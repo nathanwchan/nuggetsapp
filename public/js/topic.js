@@ -88,7 +88,7 @@ function updateMyNuggetsMarkup(results, highlightText)
     {
       timeAgo = moment().fromNow();
     }
-    markup_to_push += '<div class="row-fluid"><span class="nugget-time-ago">' + timeAgo + '</span>';
+    markup_to_push += '<div class="row-fluid nugget-time-ago"><span>' + timeAgo + '</span>';
     markup_to_push += '</div></div>';
     markup_to_push += '<div class ="nugget-toolbar"> <span class="span1 fa nugget-action-icons"><span class = "nugget-action-icons-left"><a class="fa-link nugget-action-icon" style="color:white" target="_blank" href="' + results[i].url + '">' + '</a><a class="fa-twitter nugget-action-icon" style="color:white" target="_blank" href="' + twitterUrl(results[i]) + '""></a></span><span class="nugget-action-icons-right"></span></span></div>';
     markup_to_push += '</div></div>';
