@@ -466,61 +466,31 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
-	var onedayDelayed = (24 * 3600 * 1000);
-	var startTime = new Date(d.getTime() - 7 * onedayDelayed);
-	var endTime = new Date(d.getTime() - 6 * oneday);
-	console.log(startTime + " " + endTime);
+	var startTime = new Date(d.getTime() - oneday);
+	console.log("start time: " + startTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
-	query.lessThan("createdAt", endTime); 
 	query.limit(1000);
 	var userCount = 0; 
-	var Mailgun = require('mailgun');
-	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
-	query.find({
-		success: function (users) {
+	var emailPromises = []; 
+	query.find(function (users) {
 
-
+			console.log("total users: " + users.length);
 			for (index = 0; index < users.length; ++index)
 			{
-				userCount++; 
+				userCount++;
 				user = users[index]; 
 				try
 				{
 					
 					var name = user.get("displayname"); 
 					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
-					htmlEmail = htmlNuggetsText("Welcome to Nuggets, " + name +"!", htmlEmail); 
-					var textEmail = textWelcomeEmail(name); 
-					
+					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
+					var textEmail = textWelcomeEmail(name);	
 
-					if(userCount%5 ==0)
+					if(index%10 ==0)
 					{
-						sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Do you remember what you learned last month?", textEmail, htmlEmail); 
-						console.log(name);
-						
-						/*
-						Mailgun.sendEmail({
-										from: "Nuggets <hello@nuggetsapp.com>",
-										to: user.get("email"),
-										subject: "Welcome to Nuggets, " + name,
-										text: textEmail,
-										html: htmlEmail,
-									},
-									{
-									  success: function(httpResponse) {
-									    // console.log(httpResponse);
-									    //response.success("Email sent!");
-									    if(index%10 == 0) 
-									    	{console.log(name + " " + index); }
-									    userCount++;
-									  },
-									  error: function(httpResponse) {
-									    console.error("error send email: " + httpResponse);
-									    //response.error("Uh oh, something went wrong");
-									  }
-									});
-
-						setTimeout(function(){}, 200); */
+						var emailPromise = sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
+						emailPromises.push(emailPromise); 
 						
 					}
 
@@ -529,29 +499,24 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 				catch(err)
 				{
 					console.log("error welcome: " + err + "\n" + err.stack); 
-
 				}
-				
+
 			}
 
-			status.success(userCount + " welcome emails sent.")
-			}, error: function() {
+			console.log("email promises: " + emailPromises.length);
+			return Parse.Promise.when(emailPromises);
+			
+		}).then(function(){ 
 
-				console,log("error user query failed");
-				status.error("welcome email failde"); 
-
-			} 
-
-
-		}); 
-
+		    status.success(userCount + " emails.");   },function(error) {
+		    console.log(error);
+		    status.error("error: " + error);  
+     	});
 
 });
 
 Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
-    
-    console.log("starting welcome email"); 
-	var query = new Parse.Query(Parse.User);   
+  	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
 	var onedayDelayed = (24 * 3600 * 1000);
@@ -562,49 +527,26 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 	query.lessThan("createdAt", endTime); 
 	query.limit(1000);
 	var userCount = 0; 
-	var Mailgun = require('mailgun');
-	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
-	query.find({
-			success: function(users) {
+	var emailPromises = []; 
+	query.find(function (users) {
+
+			console.log("total users: " + users.length);
 			for (index = 0; index < users.length; ++index)
 			{
-				userCount++; 
+				userCount++;
 				user = users[index]; 
 				try
 				{
 					
 					var name = user.get("displayname"); 
 					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
-					htmlEmail = htmlNuggetsText("Welcome to Nuggets, " + name +"!", htmlEmail); 
-					var textEmail = textWelcomeEmail(name)
+					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
+					var textEmail = textWelcomeEmail(name);	
 
-					if(true)
+					if(index%10 ==0)
 					{
-						//sendEmail("Nuggets <hello@nuggetsapp.com>", user.get("email"), "Welcome to Nuggets, " + name, textWelcomeEmail(name), htmlEmail); 
-						
-						/*
-						Mailgun.sendEmail({
-										from: "Nuggets <hello@nuggetsapp.com>",
-										to: user.get("email"),
-										subject: "Welcome to Nuggets, " + name,
-										text: textEmail,
-										html: htmlEmail,
-									},
-									{
-									  success: function(httpResponse) {
-									    // console.log(httpResponse);
-									    //response.success("Email sent!");
-									    if(index%10 == 0) 
-									    	{console.log(name + " " + index); }
-									    userCount++;
-									  },
-									  error: function(httpResponse) {
-									    console.error("error send email: " + httpResponse);
-									    //response.error("Uh oh, something went wrong");
-									  }
-									});
-
-						setTimeout(function(){}, 200); */
+						var emailPromise = sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
+						emailPromises.push(emailPromise); 
 						
 					}
 
@@ -614,20 +556,18 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 				{
 					console.log("error welcome: " + err + "\n" + err.stack); 
 				}
-				
+
 			}
-			}, error: function() {
 
-				console,log("error user query failed");
+			console.log("email promises: " + emailPromises.length);
+			return Parse.Promise.when(emailPromises);
+			
+		}).then(function(){ 
 
-			} 
-
-			}).then(function() {
-		    //console.log("leaderBoardStatus complete console log");
-		    status.success(userCount + " emails");  },function(error) {
+		    status.success(userCount + " emails.");   },function(error) {
 		    console.log(error);
-		    status.error("error in last " + userCount);   
-			}); 
+		    status.error("error: " + error);  
+     	});  
 
 }); 
 
@@ -717,7 +657,7 @@ Parse.Cloud.job("metrics", function(request, status) {
 		}
 		else if (nuggetsToSend.length >= 6)
 		{
-			console.log("tu: " + user.get("displayname")+ " " + nuggetsToSend.length);
+			//console.log("tu: " + user.get("displayname")+ " " + nuggetsToSend.length);
         	tryingUserCount++; 
 
 		}
@@ -782,8 +722,7 @@ return welcomeEmail;
 function htmlWelcomeEmail(name)
 {
 	var welcomeEmail = "<p>Hi " + name + "," +
-"<br><p style='text-align:center'>Do you remember what you learnt last week?</p>" + 
-"<br><br>I am Aswath, the founder of Nuggets. I’m very excited to welcome you aboard. We built Nuggets because we are avid learners and it bothered us that <i><b>we forget 90% of what we learn within a week</b></i>. Nuggets leverages 2 powerful techniques, consolidation and spaced repetition, to help you record and remember everything you learn.\
+"<br><br>I am Aswath, the founder of Nuggets. I’m very excited to welcome you aboard. We built Nuggets because we are avid learners and it bothered us that <b>we forget 90% of what we learn within a week</b>. Nuggets leverages 2 powerful techniques, consolidation and spaced repetition, to help you record and remember everything you learn.\
 \
 <br><br>Here are 2 quick tips to help you make the most of Nuggets.\
 \
@@ -817,12 +756,9 @@ function sendEmail(from, to, subject, text, html) {
 				},
 				{
 				  success: function(httpResponse) {
-				    // console.log(httpResponse);
-				    //response.success("Email sent!");
 				  },
 				  error: function(httpResponse) {
 				    console.error("error send email: " + httpResponse);
-				    //response.error("Uh oh, something went wrong");
 				  }
 				});
 }
