@@ -463,15 +463,20 @@ function escapeString(myVal)
 
 Parse.Cloud.job("welcomeEmail", function(request, status) {
 
-	var query = new Parse.Query(Parse.User);   
+ 	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
+	var onedayDelayed = (24 * 3600 * 1000);
 	var startTime = new Date(d.getTime() - oneday);
 	console.log("start time: " + startTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
 	query.limit(1000);
 	var userCount = 0; 
 	var emailPromises = []; 
+	// initialize mailgun
+  	// initialize mailgun
+    var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
 	query.find(function (users) {
 
 			console.log("total users: " + users.length);
@@ -483,13 +488,22 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 				{
 					
 					var name = user.get("displayname"); 
+					var email = user.get("email");
 					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
 					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
 					var textEmail = textWelcomeEmail(name);	
 
 					if(index%10 ==0)
 					{
-						var emailPromise = sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
+						var emailPromise = Mailgun.sendEmail({
+											from: "Nuggets <hello@nuggetsapp.com>",
+											to: email,
+											subject: "Welcome to Nuggets, " + name + "!",
+											text: textEmail,
+											html: htmlEmail
+										});
+
+						//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
 						emailPromises.push(emailPromise); 
 						
 					}
@@ -507,11 +521,15 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 			return Parse.Promise.when(emailPromises);
 			
 		}).then(function(){ 
+			console.log("email promises: " + emailPromises.length);
+			return Parse.Promise.when(emailPromises);
+
+		}).then(function(){
 
 		    status.success(userCount + " emails.");   },function(error) {
 		    console.log(error);
 		    status.error("error: " + error);  
-     	});
+     	});  
 
 });
 
@@ -520,14 +538,18 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
 	var onedayDelayed = (24 * 3600 * 1000);
-	var startTime = new Date(d.getTime() - 7 * onedayDelayed);
-	var endTime = new Date(d.getTime() - 6 * oneday);
+	var startTime = new Date(d.getTime() - 9 * onedayDelayed);
+	var endTime = new Date(d.getTime() - 2 * oneday);
 	console.log(startTime + " " + endTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
 	query.lessThan("createdAt", endTime); 
 	query.limit(1000);
 	var userCount = 0; 
 	var emailPromises = []; 
+	// initialize mailgun
+  	// initialize mailgun
+    var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
 	query.find(function (users) {
 
 			console.log("total users: " + users.length);
@@ -537,8 +559,8 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 				user = users[index]; 
 				try
 				{
-					
 					var name = user.get("displayname"); 
+					var email = user.get("email");
 					var htmlEmail = escapeString(htmlWelcomeEmail(name)); 
 					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
 					var textEmail = textWelcomeEmail(name);	
@@ -546,11 +568,11 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 					if(index%10 ==0)
 					{
 						var emailPromise = Mailgun.sendEmail({
-											from: from,
-											to: to,
-											subject: subject,
-											text: text,
-											html: html
+											from: "Nuggets <hello@nuggetsapp.com>",
+											to: email,
+											subject: "Welcome to Nuggets, " + name + "!",
+											text: textEmail,
+											html: htmlEmail
 										});
 
 						//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
