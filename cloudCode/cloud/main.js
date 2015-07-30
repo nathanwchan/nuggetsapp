@@ -545,7 +545,15 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 
 					if(index%10 ==0)
 					{
-						var emailPromise = sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
+						var emailPromise = Mailgun.sendEmail({
+											from: from,
+											to: to,
+											subject: subject,
+											text: text,
+											html: html
+										});
+
+						//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
 						emailPromises.push(emailPromise); 
 						
 					}
@@ -563,6 +571,10 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 			return Parse.Promise.when(emailPromises);
 			
 		}).then(function(){ 
+			console.log("email promises: " + emailPromises.length);
+			return Parse.Promise.when(emailPromises);
+
+		}).then(function(){
 
 		    status.success(userCount + " emails.");   },function(error) {
 		    console.log(error);
@@ -747,19 +759,12 @@ function sendEmail(from, to, subject, text, html) {
 	var Mailgun = require('mailgun');
 	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
 	
-	Mailgun.sendEmail({
+	return Mailgun.sendEmail({
 					from: from,
 					to: to,
 					subject: subject,
 					text: text,
-					html: html,
-				},
-				{
-				  success: function(httpResponse) {
-				  },
-				  error: function(httpResponse) {
-				    console.error("error send email: " + httpResponse);
-				  }
+					html: html
 				});
 }
 

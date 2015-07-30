@@ -54,9 +54,9 @@ function addHighlightMarkup(text, highlightText)
 function updateMyNuggetsMarkup(results, highlightText)
 {
   var my_nuggets_markup = [];
-   var markup_to_push_col1 ='<div class="span3">';
-   var markup_to_push_col2 ='<div class="span3">';
-   var markup_to_push_col3 ='<div class="span3">';
+   var markup_to_push_col1 ='<div class="span4">';
+   var markup_to_push_col2 ='<div class="span4">';
+   var markup_to_push_col3 ='<div class="span4">';
    var markup_to_push_col4 ='<div class="span3">';
    var randomId; 
    var randomFont; 
@@ -99,7 +99,7 @@ function updateMyNuggetsMarkup(results, highlightText)
     }
     else if (i%4 == 1) markup_to_push_col2 += markup_to_push;
     else if (i%4 == 2) markup_to_push_col3 += markup_to_push;
-    else markup_to_push_col4 += markup_to_push;
+    //else markup_to_push_col4 += markup_to_push;
     
   }
   markup_to_push_col1 += "</div></div>";
@@ -109,7 +109,7 @@ function updateMyNuggetsMarkup(results, highlightText)
   my_nuggets_markup.push(markup_to_push_col1);
   my_nuggets_markup.push(markup_to_push_col2);
   my_nuggets_markup.push(markup_to_push_col3);
-  my_nuggets_markup.push(markup_to_push_col4);
+  //my_nuggets_markup.push(markup_to_push_col4);
   $('#my-nuggets-table').html(my_nuggets_markup.join(''));
 }
 

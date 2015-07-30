@@ -92,6 +92,7 @@
 .f2 {
     font-size: 16px; 
     line-height: 24px; 
+    font-weight: 200;
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif
 }
 
@@ -395,7 +396,7 @@ p {
 
 #profile-header h1 {
     font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; 
-    font-weight: 400; 
+    font-weight: 500; 
 }
 
 #login-body {
