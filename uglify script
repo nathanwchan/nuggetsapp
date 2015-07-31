@@ -1,0 +1,1 @@
+uglifyjs home.js  --compress --mangle --output home-compiled.js
