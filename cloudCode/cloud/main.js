@@ -493,9 +493,7 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
 					var textEmail = textWelcomeEmail(name);	
 
-					if(index%10 ==0)
-					{
-						var emailPromise = Mailgun.sendEmail({
+					var emailPromise = Mailgun.sendEmail({
 											from: "Nuggets <hello@nuggetsapp.com>",
 											to: email,
 											subject: "Welcome to Nuggets, " + name + "!",
@@ -503,10 +501,9 @@ Parse.Cloud.job("welcomeEmail", function(request, status) {
 											html: htmlEmail
 										});
 
-						//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
-						emailPromises.push(emailPromise); 
+					//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
+					emailPromises.push(emailPromise); 
 						
-					}
 
 				}
 
@@ -537,9 +534,9 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
   	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
-	var onedayDelayed = (24 * 3600 * 1000);
-	var startTime = new Date(d.getTime() - 9 * onedayDelayed);
-	var endTime = new Date(d.getTime() - 2 * oneday);
+	var onedayDelayed = (23.3 * 3600 * 1000);
+	var startTime = new Date(d.getTime() - 10 * onedayDelayed);
+	var endTime = new Date(d.getTime() - 7 * oneday);
 	console.log(startTime + " " + endTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
 	query.lessThan("createdAt", endTime); 
@@ -565,8 +562,6 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 					htmlEmail = htmlNuggetsText("Do you remember what you learned last week?", htmlEmail); 
 					var textEmail = textWelcomeEmail(name);	
 
-					if(index%10 ==0)
-					{
 						var emailPromise = Mailgun.sendEmail({
 											from: "Nuggets <hello@nuggetsapp.com>",
 											to: email,
@@ -577,8 +572,7 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
 
 						//sendEmail("Nuggets <hello@nuggetsapp.com>", "aswath87@gmail.com", "Welcome to Nuggets, " + name +"!", textEmail, htmlEmail); 
 						emailPromises.push(emailPromise); 
-						
-					}
+					
 
 				}
 

@@ -13,6 +13,21 @@
     margin-right: auto;
 }
 
+.myButton {
+    background-color: #5837F2;
+    -moz-border-radius: 40px;
+    -webkit-border-radius: 40px;
+    border-radius: 20px;
+    display: inline-block;
+    cursor: pointer;
+    color: #ffffff;
+    font-family: Arial;
+    font-size: 14px;
+    padding: 8px 12px;
+    text-decoration: none;
+    margin-top: 5px;
+}
+
 
 
 .backgroundOne {
@@ -412,6 +427,24 @@ p {
 .navbar .brand
 {
     margin-top: 4px; 
+}
+
+.download
+{
+    display: block;
+    margin-left: -10px;
+}
+
+.download a 
+{
+    text-decoration: none; 
+    color:white;
+}
+
+.brand a 
+{
+    color:inherit;
+    text-decoration: none;
 }
 
 #my-nuggets-table {
