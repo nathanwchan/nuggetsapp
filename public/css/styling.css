@@ -97,6 +97,16 @@
     background-color: rgb(28, 232, 181); 
 }
 
+#download-nugget {
+
+    background-color: #5837F2; 
+    color: white; 
+    font-size: 16px; 
+    line-height: 24px; 
+    font-weight: 200;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif
+}
+
 .f1 {
       font-size: 24px;
   font-weight: 300;
@@ -291,6 +301,14 @@ p {
         color: #15c;
         text-decoration: underline;
 }
+
+#download-nugget a {
+        color: white;
+        text-decoration: underline;
+        font:inherit;
+}
+
+
 .nugget-wrapper a {
     font-size: 12px;
     line-height: 12px; 

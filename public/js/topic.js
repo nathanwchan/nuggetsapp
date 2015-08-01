@@ -60,6 +60,21 @@ function updateMyNuggetsMarkup(results, highlightText)
    var randomFont; 
   for(i=0;i<results.length;i++)
   {
+    if(i == Math.round(results.length/3) || i == Math.round(2 * results.length/3) + 1 )
+    {
+      var markup_to_push = '';
+      randomId = Math.round(Math.random()*10) + 1;
+      randomFont = Math.round(Math.random()*5) + 1;
+      markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper" id="download-nugget"><div id="download-nugget" class="nugget-content"><p>' + addHighlightMarkup("We forget most of what we read within a week. " + "<a href='http://www.nuggetsapp.com'> Download Nuggets</a> to save and remember everything you learn.", highlightText);
+      markup_to_push += '</div></div></div>';
+      if(i%3 == 0) {
+        markup_to_push_col1 += markup_to_push;
+      }
+      else if (i%3 == 1) markup_to_push_col2 += markup_to_push;
+      else if (i%3 == 2) markup_to_push_col3 += markup_to_push;
+      //else markup_to_push_col4 += markup_to_push;
+
+    }
     var markup_to_push = '';
     randomId = Math.round(Math.random()*10) + 1;
     randomFont = Math.round(Math.random()*5) + 1;
