@@ -1,184 +1,476 @@
 <!DOCTYPE html>
-<html><head><meta http-equiv="Content-Type" content="text/html; charset=windows-1252">
-  <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/dknmljjdjjaebkignimdoenficoamfil">
-  <title>Nuggets - Remember everything you learn</title>
-  <meta name="google-site-verification" content="3gRZzNTjOHiXWuBA7RCX-BD39jq1PafIgCmQwGKsbQM" />
-  <meta name="viewport" content="initial-scale=1,user-scalable=no">
-  <meta name="description" content="Nuggets: Remember everything you learn">
-  <meta property="og:title" content="Nuggets - Remember everything you learn">
-  <meta property="og:description" content="Nuggets - Remember everything you learn">
-  <link rel="stylesheet" type="text/css" href="/css/home.css">
-  <link rel="icon" type="image/x-icon" href="/img/nuggets_logo_notext.png">
-  <script async="" src="/js/analytics.js"></script><script type="text/javascript" src="/js/jquery-2.1.1.min.js"></script><style type="text/css"></style>
-  <script type="text/javascript" src="/js/home-compiled.js"></script>
-  <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
-    <script type="text/javascript" src="/js/bootstrap.js"></script>
-    <script type="text/javascript" src="/js/parse-1.2.8.min.js"></script>
-  <script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<html class="no-js">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 
-  ga('create', 'UA-61288581-1', 'auto');
-  ga('send', 'pageview');
+        <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/dknmljjdjjaebkignimdoenficoamfil">
+          <title>Nuggets - Remember everything you learn</title>
+          <meta name="google-site-verification" content="3gRZzNTjOHiXWuBA7RCX-BD39jq1PafIgCmQwGKsbQM" />
+          <meta name="description" content="Nuggets: Remember everything you learn">
+          <meta property="og:title" content="Nuggets - Remember everything you learn">
+          <meta property="og:description" content="Nuggets - Remember everything you learn">
+          <link rel="icon" type="image/x-icon" href="img/nuggets_logo_notext.png">
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width">
 
-</script>
-<script type="text/javascript">var switchTo5x=true;</script>
-<script type="text/javascript" src="http://w.sharethis.com/button/buttons.js"></script>
-<script type="text/javascript">stLight.options({publisher: "e49db7a2-93c0-44cc-af32-f59d58e6cf7f", doNotHash: false, doNotCopy: false, hashAddressBar: false});</script>
-</head>
-<body>
-<div id="wrapper">
-  <section id="intro" class="section">
-    <div class="background backgroundOne" style="-webkit-transform: translate3d(0px, 0px, 0px);"></div>
-    <div class="background backgroundTwo" style="-webkit-transform: translate3d(0px, 0px, 0px);"></div>
-    <div class="background backgroundThree" style="-webkit-transform: translate3d(0px, 0px, 0px);"></div>
-    <div class="introContent">
-      <div>
-        <img id="logo" src="/img/nuggets_logo.png"/>
-      </div>
-      <p class="description">Remember everything you learn</p>
-      
+        <link rel="stylesheet" href="css/theme/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/main.css"/>
+        <link rel="stylesheet" href="css/override.css" />
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+        
+        <link href="css/jquery.bxslider.css" rel="stylesheet" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
+        
+        <script src="js/home.js"></script>
+        <script>
+          (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+          (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+          m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+          })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-      <a href="#" class="myButton" onclick="chrome.webstore.install()" id="install-link">Add to Chrome</a>
-      <div class="coming-soon">
-        <p>Web, Android and iPhone apps coming soon.</p>
-      </div>
-      <div class= "social">
-        <span class='st_fblike' st_url='http://facebook.com/nuggetsapp' displayText='Facebook Like'></span>
-<span class='st_twitterfollow' displayText='Twitter Follow' st_username='nuggets_app'></span>
-<span class='st_sharethis' st_url='http://www.nuggetsapp.com' displayText='ShareThis'></span>
-<span class='st_' displayText=''></span>
-      </div>
-    </div>
-    
-    
-  </section>
+          ga('create', 'UA-61288581-1', 'auto');
+          ga('send', 'pageview');
 
-  <div id="content">
-    <section id="street" class="section">
-        <h2>Record the stuff you learn in nuggets of 200 chars.</h2>
-        <div class="sub-text"> You can type it out or simply highlight the text to create a nugget.</div>
-        <div id="streetWrap">
-          <div class="street cf">
-            <div class="card card1">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card2">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card3">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card4">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card5">
-              <div class="cardContent">
-              </div>
-            </div>
-          </div>
-          <div class="street cf" style="left:1010px;">
-            <div class="card card1">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card2">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card3">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card4">
-              <div class="cardContent">
-              </div>
-            </div>
-            <div class="card card5">
-              <div class="cardContent">
-              </div>
-            </div>
-          </div>
+        </script>
+        
+
+        <!--[if lte IE 9]>
+        <link rel="stylesheet" type="text/css" href="css/ie9-and-down.css" />
+        <![endif]-->
+
+        <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
+        <script src="js/vendor/video.js"></script>
+
+        <link rel="chrome-webstore-item" href="https://chrome.google.com/webstore/detail/dknmljjdjjaebkignimdoenficoamfil">
+    </head>
+    <body>
+        <div class="main">
+            <section class="home full-color">
+                <div class="container">
+
+                    <div class="home-phone hide hidden-xs col-xs-12 col-sm-5">
+                        <img src="img/iphone-3.png" class="iphone-3 " alt="">
+                    </div>
+
+                    <div class="row">
+                        <div class="home-copy col-xs-12 col-sm-8 col-sm-offset-2 animated fadeInDown delay-2 ">
+                            <h1 class="demo1">Remember Everything<br> you Learn<!--<span class="rotate">  Learn, Read, Discuss, Think </span>--></h1>
+
+                            <p>Nuggets helps you Record, Remember and Share <br>everything you learn</p>
+
+                            <div class="add-to-chrome animated fadeInDown delay-4" href="#" class="myButton" onclick="chrome.webstore.install()" id="install-link">Add to Chrome </div>
+
+                            <div class = "center"><i class="fa fa-chevron-down"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="slide-1 slide full-color">
+                <div class="container">
+                    <div class="row">
+
+                        <div class="col-xs-12 col-sm-4 copy vertical-center">
+                            <h2 class=" hide slide-1-title slide-titles">Record what you learn in nuggets of 200 chars or lesser </h2>
+                            <p class="slide-1-1 hide">
+                                Use Nuggets to consolidate and record the essence of what learn. 
+                            </p>
+
+                            <p class="slide-1-2 hide hidden-xs">
+                            Prefer not to type? Simply highlight any text in the browser and add to Nuggets. 
+                            </p>
+                            <div class="center"><i class="hide fa fa-chevron-down slide-1-scroll scroll-down"></i></div>
+                        </div>
+                        <div class="col-xs-12 col-sm-6 iphone-container ">
+                            <ul class="slider8">
+                              <div class="slide">
+                                <div class="nugget-wrapper f3" id="g7">
+                                    <div id="hKnsc3twdr" class="nugget-content">Learn how to work hard and stick with something. Learn how to turn off Facebook and control your addiction to social media. You'll instantly be ahead of a majority of your generation.
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#life</span>
+                                            <span class="nugget-tag">#success</span>
+                                        </div>
+                                        <div class="nugget-source"> 
+                                            <img src="img/youtube.png" width="36" style="float: left;"/>
+                                            <span class= "source-link"> How to Start a Startup </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper f3" id="g1">
+                                    <div id="hKnsc3twdr" class="nugget-content">Hawthorne effect or observer effect: Individuals improve or modify their behavior in response to their awareness of being observed.
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#psychology</span>
+                                            <span class="nugget-tag">#trivia</span>
+                                        </div>
+                                        <div class="nugget-source"> 
+                                            <img src="img/wiki.png" width="36" style="float: left;"/>
+                                            <span class= "source-link"> www.wikipedia.org </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                              <div class="nugget-wrapper f3" id="g2">
+                                    <div id="hKnsc3twdr" class="nugget-content">10% of americans originated from pilgrim immigrants from england. the local indian tribe poconoca taught them to survive; pilgrims helped them defeat a rival. That celebration remains - thanksgiving
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#history</span>
+                                            <span class="nugget-tag">#america</span>
+                                            <span class="nugget-tag">#thanksgiving</span>
+                                        </div>
+                                        <div class="nugget-source"> 
+                                            <img src="img/historyc.png" width="36" style="float: left;"/>
+                                            <span class= "source-link"> America: The story of us </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper f3" id="g4">
+                                    <div id="hKnsc3twdr" class="nugget-content">Your body language affects your body chemistry and other's perceptions. Acting confident and open gestures can actually make you confident.
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#body language</span>
+                                            <span class="nugget-tag">#confidence</span>
+                                        </div>
+                                        <div class="nugget-source"> 
+                                            <img src="img/ted.png" width="36"style="float: left;"/>
+                                            <span class= "source-link"> www.ted.com/amy_cuddy </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper f3" id="g5">
+                                    <div id="hKnsc3twdr" class="nugget-content">user retention is the most important measure of a startup. what % of users use our product after X months? This should stay flat.
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#startup</span>
+                                            <span class="nugget-tag">#growth</span>
+                                        </div>
+                                        <div class="nugget-source"> 
+                                            <img src="img/quora.png" width="36" style="float: left;"/>
+                                            <span class= "source-link"> www.quora.com </span>
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+            </section>
+            <section class="slide-2 slide full-color">
+                <div class="container">
+                    <div class="row vertical-center">
+
+                        <div class="col-xs-12 col-sm-4 copy ">
+                            <h2 class=" hide slide-2-title slide-titles">Get timely reminders, based on your memory retention patterns.</h2>
+
+                            <p class="slide-2-1 hide">
+                            You will get reminders via email and browser notifications.
+                            </p>
+
+                            <p class="slide-2-2 hide hidden-xs">
+                            Reminders are curated and timed based on effective memory techniques. 
+                            </p>
+                            <div class = "center"><i class="fa fa-chevron-down"></i></div>
+                            <!--
+                            <p class="slide-2-3 hide hidden-xs">
+                            Remember simplicty will keep your work looking its best. Keep it simple.
+                            </p>-->
+                        </div>
+
+                        <div class="col-xs-12 col-sm-6 reminders-container">
+                            <!--<img src="img/iphone-2.png" class="hide iphone-2" alt="">-->
+                            <ul class="reminder-slider">
+                              <li>
+                                <div class="slide">
+                                  <div class="nugget-wrapper f3" id="g3">
+                                    <div class="nugget-header" id="g6"> From a year back...</div>
+                                    <div class="nugget-content">“I wake up in the morning unsure of whether I want to savor the world or save the world,”. It'll be great to do stuff that does both.
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#life</span>
+                                        </div>
+                                        <!--<div class="nugget-source"> 
+                                            <img src="img/quora.png" width="36" style="float: left;"/>
+                                            <span class= "source-link"> www.quora.com </span>
+                                        </div>-->
+
+                                    </div>
+                                    </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="slide">
+                                  <div class="nugget-wrapper f3" id="g3">
+                                    <div class="nugget-header" id="g4"> From yesterday...</div>
+                                    <div class="nugget-content">Americans’ daily spending on energy - about $1 billion on electricity and $1.4 billion on fuel for their vehicles.<br><br>
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#trivia</span>
+                                            <span class="nugget-tag">#energy</span>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                              </li>
+                              <li>
+                                <div class="slide">
+                                  <div class="nugget-wrapper f3" id="g3">
+                                    <div class="nugget-header" id="g5"> From a month ago...</div>
+                                    <div class="nugget-content">Don't design products; design customer experiences.<br><br>
+                                        <div class="nugget-tag-section"> 
+                                            <span class="nugget-tag">#design</span>
+                                            <span class="nugget-tag">#startup</span>
+                                        </div>
+
+                                    </div>
+                                    </div>
+                                </div>
+                              
+                            </li>
+                            </ul>
+                        </div>
+                        <!--
+
+                        <div class="col-xs-12 col-sm-4 copy">
+
+                            <p class="slide-2-4 hide hidden-xs">
+                            Use the settings cog to see what options you have avalible. Perhaps have a big video of your team hard at work in the office showing through using the opacity setting.
+                            </p>
+
+                            <p class="slide-2-5 hide hidden-xs">
+                            Adding animations is easy, simply follow the examples in the code, use delay- to slow down or speed up the animations.
+                            </p>
+
+                            <p class="slide-2-6 hide hidden-xs">
+                            Changing slide colors, images and video is all really easy. You may need to jump into CSS code to change specific styles.
+                            </p>
+                            <i class="hide fa fa-chevron-down slide-2-scroll scroll-down hidden-xs"></i>
+                        </div>
+                        -->
+                    </div>
+                </div>
+            </section>
+            <section class="slide-3 slide full-color">
+                <div class="container">
+                    <div class="row ">
+
+                        <div class="col-xs-12 col-sm-4 copy vertical-center">
+                            <h2 class=" hide slide-3-title slide-titles">  Learn from friends and experts</h2>
+                            <p class="slide-3-1 hide">Follow people and topics that you are interested in to browse their nuggets</p>
+
+
+                            <p class="slide-3-2 hide hidden-xs">
+                            Share what your learn by sharing your nugget collections
+                            </p>
+
+
+<!--
+                            <p class="slide-3-3 hide hidden-xs">
+                            PSD files are added for your screenshots, drop them right in and be up and running quickly.
+                            </p>
+                        -->
+                            <i class="hide fa fa-chevron-down slide-3-scroll scroll-down hidden-xs"></i>
+                        </div>
+
+                        <div class="col-xs-12 col-sm-3 iphone-container ">
+                            <ul class="people-slider">
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g7">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/billg.jpeg"/>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g1">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/startup.jpg"/>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                              <div class="nugget-wrapper-thin f3" id="g2">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/health.png"/>
+
+                                    </div>
+                                </div>
+                                </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g4">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/neil.jpg"/>
+
+                                    </div>
+                                </div>
+                              </div>
+                            </ul>
+                        </div>
+                        <div class="col-xs-12 col-sm-3 iphone-container ">
+                            <ul class="topic-slider">
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g7">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/design.jpeg"/>
+                                        <div class="nugget-source"> 
+                                        </div>
+
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g1">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/buffet.png"/>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                              <div class="nugget-wrapper-thin f3" id="g2">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/cook.jpg"/>
+
+                                    </div>
+                                </div>
+                                </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g4">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/chris.jpg"/>
+                                    </div>
+                                </div>
+                              </div>
+                              <div class="slide">
+                                <div class="nugget-wrapper-thin f3" id="g5">
+                                    <div id="hKnsc3twdr" class="nugget-content"><img src="img/math.jpg"/>
+
+                                    </div>
+                                </div>
+                              </div>
+                            </ul>
+                        </div>
+
+                        <!--<div class="col-xs-12 col-sm-8">
+                            <img src="img/iphone-3.png" class="hide iphone-3" alt="">
+                        </div>-->
+                    </div>
+
+                </div>
+            </section>
+            <section class="contact full-color">
+                <div class="row">
+                    <div class="col-xs-12 col-sm-6 col-sm-offset-3 col-md-6 col-md-offset-3">
+                        <h2>Get Nuggets now!</h2>
+                        <p> Web, IPhone and Android apps coming soon.</p>
+
+                        <span class="add-to-chrome animated fadeInDown delay-4" href="#" class="myButton" onclick="chrome.webstore.install()" id="install-link">Add to Chrome </span>
+                        <!--
+
+                        <div class="newsletter clearfix">
+                            <div id="mc_embed_signup">
+
+                                <!--
+                                form action must be set as url for mailchimp account. Ensure that it uses post-json and that you have a c=? on the end as below.
+
+                                example  action="//testusername.us3.list-manage.com/subscribe/post-json?u=75f4e1b40d3762253171e9d55&amp;id=c74a91dc25&amp;c=?"
+                                
+
+                                <form action="//sambillingham.us3.list-manage.com/subscribe/post-json?u=75f4e1b90d3762255171e9d55&amp;id=c75a95dc25&amp;c=?" method="get" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate" target="_blank" novalidate>
+                                    <input type="email" value="" name="EMAIL" class="email" id="mce-EMAIL" placeholder="Your Email" required>
+                                    <button type="submit" class="btn submit btn-signup" value="" name="subscribe" id="mc-embedded-subscribe" class="button"><i class="fa fa-paper-plane"></i></button>
+                                </form>
+                            </div>
+                            <div class="sign-up-message hidden"></div>
+                        </div>-->
+
+                        <div class="social clearfix">
+                            <a href="https://www.facebook.com/nuggetsapp" class="social-item facebook"><i class="fa fa-facebook"></i></a>
+                            <a href="https://www.twitter.com/nuggets_app" class="social-item twitter"><i class="fa fa-twitter"></i></a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+        </div> <!-- /main -->
+        <!--
+        <div class="icon animated fadeInLeft delay-3">
+            <span> Showcase </span>
         </div>
-    </section>
 
-    <section id="customize" class="section">
-      <h2>Get timely reminders, based on your memory retention patterns.</h2>
-      <div class="sub-text"> You will get reminders via email and browser notifications.</div>
-      <div id="screens">
-        <div id="screen" class="room3">
-          <div class="navBar"></div>
-          <div class="roomBody">
-            <div class="username"></div>
-            <div class="roomContent">
-              <div class="image image1"></div>
-              <div class="image image2"></div>
-              <div class="image image3"></div>
-              <div class="wash" style="-webkit-animation-name: opacity;"></div>
-              <div class="animate" style="-webkit-animation-name: like;"></div>
-            </div>
-            <div class="ufi">
-              <div class="button like"></div>
-              <div class="button comment">Remind me less</div>
-            </div>
-          </div>
+        <div class="settings animated fadeInLeft delay-4">
+
+            <span class="settings-icon">
+                <i class="fa fa-cog"></i>
+            </span>
+            <h3 class="settings-title"> Settings </h3>
+
+            <span class="settings-subtitle">Home</span>
+            <span class="toggle-video hidden-xs">toggle video </span>
+            <span class="toggle-phone hidden-xs">toggle phone</span>
+            <span class="toggle-opacity-first">toggle opacity first</span>
+            <span class="settings-subtitle">Global</span>
+            <span class="toggle-opacity-all">toggle opacity all</span>
         </div>
-      </div>
-    </section>
+        -->
+        <script src="js/plugins.js"></script>
+        <script src="js/main.js"></script>
+        <script src="js/jquery.bxslider.min.js"></script>
+        <script>
+        $(document).ready(function(){
 
-    <section id="nickname" class="section">
-      <div id="nameWrap">
-        <div class="verticalAlign">
-        <h2>Easily organize using #hashtags</h2>
-        <div class="sub-text"> Browse and search your nuggets using keywords or hashtags.</div>
-        <div class="dialog dialog1">
-          <div class="title">The universe is ~13.8 <br>billion years old</div>
-          <div class="usernameInput"><span id="name" class="emoji1">#trivia</span><div class="cursor"></div></div>
-          <div class="confirm">Save</div>
-        </div>
-        </div>
-      </div>
-    </section>
+              $('.slider8').bxSlider({
+                auto: true,
+                mode: 'vertical',
+                slideWidth: 400,
+                minSlides: 3,
+                infiniteLoop: true,
+                slideMargin: 10,
+                controls:false,
+                speed: 2000,
+                randomStart:true,
+              });
 
-    <section id="community" class="section">
-      <h2>Follow and learn from friends and experts</h2>
-      <div class="sub-text"> Your nuggets are private by default. You can choose to share them.</div>
-      <div id="screens2">
-        <div id="screen2">
-          <div class="navBar"></div>
-          <div class="roomBody">
-            <div class="username">billgates</div>
-            <div class="roomContent">
-              <div class="textPost">
-                Treatment without prevention<br>is simply unsustainable.
-              </div>
-            </div>
-            <div class="inlineLike">Save</div>
-            <ul id="comments">
-              <li class="comment comment1">
-                <div class="commentUsername">stephenhawking</div>
-                <div class="commentBody">I am just a child who has never grown up. I still keep asking these 'how' and 'why' questions. Occasionally, I find an answer.</div>
-                <div class="inlineLike">Save</div>
-              </li>
-              <li class="comment comment2">
-                <div class="commentUsername">john</div>
-                <div class="commentBody">Positive Deviance: Looking for solutions among individuals in the community who are already doing well. #design</div>
-                <div class="inlineLike">Save</div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </section>
-  </div>
-</div>
+              $('.people-slider').bxSlider({
+                auto: true,
+                mode: 'vertical',
+                slideWidth: 400,
+                minSlides: 4,
+                infiniteLoop: true,
+                slideMargin: 4,
+                controls:false,
+                speed: 1250,
+                randomStart:true,
+              });
 
+              $('.topic-slider').bxSlider({
+                auto: true,
+                mode: 'vertical',
+                slideWidth: 400,
+                minSlides: 4,
+                infiniteLoop: true,
+                slideMargin: 2,
+                controls:false,
+                speed: 2800,
+                randomStart:false,
+              });
 
+              $('.reminder-slider').bxSlider({
+              mode: 'horizontal',
+              useCSS: false,
+              infiniteLoop: true,
+              hideControlOnEnd: true,
+              auto: true, 
+              speed: 1000,
+              slideMargin: 10,
+              slideWidth: 400, 
+              controls:false,
+              randomStart:true,
+            });
 
-</body></html>
+            });
+        </script>
+    </body>
+</html>

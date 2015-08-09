@@ -68,6 +68,12 @@
     }
 }
 
+.nugget-content {
+
+    padding: 10px;
+    margin: 10px;
+}
+
 
 #g1 {
     background-color: rgb(28, 232, 181); 

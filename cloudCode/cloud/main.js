@@ -31,6 +31,7 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 	    //nuggets_user_query.equalTo("user", user); 
 	    var d = new Date();
 		var oneday = (24 * 3600 * 1000);
+		var threedays = (3 * 24 * 3600 * 1000);
 		var oneweek = (9 * 24 * 3600 * 1000);
 		var twoweeks = (2 * 7 * 24 * 3600 * 1000);
 		var onemonth = (30 * 24 * 3600 * 1000);
@@ -40,6 +41,7 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 		var twoyears = (2 * 12 * 30 * 24 * 3600 * 1000);
 
 		var onedayback = new Date(d.getTime() - oneday);
+		var threedaysback = new Date(d.getTime() - threedays); 
 		var oneweekback = new Date(d.getTime() - (oneweek));
 		var twoweeksback = new Date(d.getTime() - (twoweeks));
 		var onemonthback = new Date(d.getTime());
@@ -60,6 +62,14 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
 	    onedayQuery.notEqualTo("isDeleted", true); 
 	    onedayQuery.greaterThanOrEqualTo("createdAt", onedayback);
 	    onedayQuery.equalTo("user", user);
+
+	    /*var threedayQuery = new Parse.Query(Nugget_User);
+	    //oneweekQuery.include("nugget");
+	    threedayQuery.notEqualTo("isDeleted", true); 
+	    threedayQuery.include("nugget");
+	    threedayQuery.greaterThanOrEqualTo("createdAt", threedaysback);
+	    threedayQuery.lessThan("createdAt", new Date(threedays.getTime() + oneday));
+	    threedayQuery.equalTo("user", user);*/
 
 	    var oneweekQuery = new Parse.Query(Nugget_User);
 	    //oneweekQuery.include("nugget");
@@ -150,8 +160,6 @@ Parse.Cloud.job("testReminderEmail", function(request, status) {
         	var nuggetsReminderText = "Good Morning, " + user.get("displayname") + "!\n\nHere are your nuggets for the day: \n\n";
         	var htmlNuggetsReminderText = "<p>Good Morning, " + user.get("displayname") + "!";
         	if(emailSentCount > 30) console.log("got name stuff");
-
-        	
 
 			for(i=0; i< nuggetsToSend.length; i++)
 	        {
@@ -257,6 +265,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 	    //nuggets_user_query.equalTo("user", user); 
 	    var d = new Date();
 		var oneday = (24 * 3600 * 1000);
+		var threedays = (3 * 24 * 3600 * 1000);
 		var oneweek = (7 * 24 * 3600 * 1000);
 		var twoweeks = (2 * 7 * 24 * 3600 * 1000);
 		var onemonth = (30 * 24 * 3600 * 1000);
@@ -266,6 +275,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 		var twoyears = (2 * 12 * 30 * 24 * 3600 * 1000);
 
 		var onedayback = new Date(d.getTime() - oneday);
+		var threedaysback = new Date(d.getTime() - threedays); 
 		var oneweekback = new Date(d.getTime() - (oneweek));
 		var twoweeksback = new Date(d.getTime() - (twoweeks));
 		var onemonthback = new Date(d.getTime());
@@ -285,6 +295,13 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 	    onedayQuery.notEqualTo("isDeleted", true); 
 	    onedayQuery.greaterThanOrEqualTo("createdAt", onedayback);
 	    onedayQuery.equalTo("user", user);
+
+	    /*var threedayQuery = new Parse.Query(Nugget_User);
+	    threedayQuery.notEqualTo("isDeleted", true); 
+	    threedayQuery.include("nugget");
+	    threedayQuery.greaterThanOrEqualTo("createdAt", threedaysback);
+	    threedayQuery.lessThan("createdAt", new Date(threedays.getTime() + oneday));
+	    threedayQuery.equalTo("user", user);*/
 
 	    var oneweekQuery = new Parse.Query(Nugget_User);
 	    oneweekQuery.notEqualTo("isDeleted", true); 
@@ -378,6 +395,7 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 	        	{
 		        	var count = i + 1;
 		        	url = nuggetsToSend[i].get("url");
+		        	htmlUrl = "";
 		        	if (typeof url == "string")
 		        	{
 			        	if(url.length > 0)
@@ -403,9 +421,9 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 		    nuggetsReminderText += "Have a great day,\nNuggets Team\n\nTo share feedback, questions or unsubscribe, email hello@nuggetsapp.com";
 		    htmlNuggetsReminderText += "<br><br>" + "Have a great day,<br>Nuggets Team";
 
-	        if(emailSentCount%10 == 0)
+	        if(emailSentCount%20 == 0)
 	        {
-	        	console.log(totalUserCount + " " + user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
+	        	console.log("sent email to: " + totalUserCount + " " + user.get("displayname") + " " + user.get("email") + " nugget count: " + nuggetsToSend.length);
 	    	}
 	        //console.log("reminder text: " + nuggetsReminderText); 
 	        
@@ -421,11 +439,9 @@ Parse.Cloud.job("sendEmail", function(request, status) {
 				{
 				  success: function(httpResponse) {
 				  	emailSentCount++;
-				    // console.log(httpResponse);
 				  },
 				  error: function(httpResponse) {
 				    console.error("error sending email: " + user.get("email") + ": " + httpResponse);
-				    //response.error("Uh oh, something went wrong");
 				  }
 				});
 	   		}
@@ -534,9 +550,9 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
   	var query = new Parse.Query(Parse.User);   
 	var d = new Date();
 	var oneday = (24 * 3600 * 1000);
-	var onedayDelayed = (23.3 * 3600 * 1000);
-	var startTime = new Date(d.getTime() - 10 * onedayDelayed);
-	var endTime = new Date(d.getTime() - 7 * oneday);
+	var onedayDelayed = (24 * 3600 * 1000);
+	var startTime = new Date(d.getTime() - 7 * onedayDelayed);
+	var endTime = new Date(d.getTime() - 4 * oneday);
 	console.log(startTime + " " + endTime);
 	query.greaterThanOrEqualTo("createdAt", startTime);
 	query.lessThan("createdAt", endTime); 
@@ -598,6 +614,107 @@ Parse.Cloud.job("adhocWelcomeEmail", function(request, status) {
      	});  
 
 }); 
+
+Parse.Cloud.job("superUsers", function(request, status) {
+
+  	// initialize mailgun
+  	// initialize mailgun
+    var Mailgun = require('mailgun');
+	Mailgun.initialize('nuggetsapp.com','key-7p2xc8vjbmzs3aoz333-pnjbk0ahbqf8');
+    
+	var query = new Parse.Query(Parse.User);   // Query for all users  
+	var totalUserCount = 0;
+	var superUserCount = 0; 
+	var enthuUserCount = 0; 
+	var tryingUserCount = 0; 
+	var noobUser = 0;
+	var oneNuggetUser = 0; 
+	var zeroUser = 0;
+	var emails = ""; 
+
+	query.each(function(user) {
+	totalUserCount++; 
+
+	try
+	{
+
+	var nuggetsToSend = [];     
+	var promise = Parse.Promise.as();
+	promise = promise.then(function() {
+        // return a promise that will be resolved 
+        var Nugget_User = Parse.Object.extend("Nugget_User");
+
+	    
+	    var onedayQuery = new Parse.Query(Nugget_User);
+	    //onedayQuery.include("nugget");
+	    onedayQuery.include("nugget");
+	    onedayQuery.notEqualTo("isDeleted", true); 
+	    onedayQuery.equalTo("user", user);
+
+	    var oneweekQuery = new Parse.Query(Nugget_User);
+	    //oneweekQuery.include("nugget");
+	    oneweekQuery.notEqualTo("isDeleted", true); 
+	    oneweekQuery.include("nugget");
+	    oneweekQuery.equalTo("user", user);
+
+
+	    var arrayOfQueries = [onedayQuery, oneweekQuery]; // threemonthsQuery, sixmonthsQuery, oneyearQuery, twoyearsQuery];
+		var nuggets_user_query = Parse.Query.or.apply(Parse.Query, arrayOfQueries); 
+        //console.log("running nugget_user query...");
+        return nuggets_user_query.each(function(nugget_user){
+           try
+           {
+	       var nugget = nugget_user.get("nugget");
+	       nuggetsToSend.push(nugget);
+	       /*
+	       return nugget.fetch({
+					  	success: function(nugget) {
+					  	nuggetsToSend.push(nugget);
+				  		},
+					  error: function(nugget, error) {
+					    // The object was not refreshed successfully.
+					    console.log("error fetching a  nugget " + user.get("email") + " " + nugget.id + " " + error);
+					  }
+					});
+*/
+	   		}
+	   		catch(err)
+	   		{
+	   			console.log("error fetching nugget from nugget_user: " + err);
+
+	   		}
+        });		
+
+    }).then(function() {
+
+    	
+    	if(nuggetsToSend.length >= 15)
+        {        	
+        	emails += user.get("email") + ", "; 
+	        
+		}
+    	
+        //console.log("DONE HERE");
+    });
+
+
+    return promise;
+	}
+
+	catch (err)
+	{
+		console.log(err);
+		return promise;
+	}
+
+  })   .then(function() {
+    //console.log("leaderBoardStatus complete console log");
+    console.log(emails);
+    status.success(totalUserCount + " users, ");   },function(error) {
+    console.log(error);
+    status.error("error: " + error);   });
+ 
+});
 
 Parse.Cloud.job("metrics", function(request, status) {
 
