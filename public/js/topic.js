@@ -60,7 +60,7 @@ function updateMyNuggetsMarkup(results, highlightText)
    var randomFont; 
    var numColumns = 3; 
    var span = 4; 
-   var width = $(window).width()
+   var width = screen.width; //$(window).width()
    if(width < 600)
    {
       numColumns = 1; 
