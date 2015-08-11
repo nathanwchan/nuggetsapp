@@ -58,6 +58,19 @@ function updateMyNuggetsMarkup(results, highlightText)
    var markup_to_push_col4 ='<div class="span3">';
    var randomId; 
    var randomFont; 
+   var numColumns = 3; 
+   var span = 4; 
+   var width = $(window).width()
+   if(width < 600)
+   {
+      numColumns = 1; 
+      span = 12; 
+   }
+
+   var markup_to_push_col1 ='<div class="span'+ span +'">';
+   var markup_to_push_col2 ='<div class="span'+ span +'">';
+   var markup_to_push_col3 ='<div class="span'+ span +'">';
+
   for(i=0;i<results.length;i++)
   {
     if(i == Math.round(results.length/3) || i == Math.round(2 * results.length/3) + 1 )
@@ -67,12 +80,18 @@ function updateMyNuggetsMarkup(results, highlightText)
       randomFont = Math.round(Math.random()*5) + 1;
       markup_to_push += '<div class="row-fluid"><div class="nugget-wrapper" id="download-nugget"><div id="download-nugget" class="nugget-content"><p>' + addHighlightMarkup("We forget most of what we read within a week. " + "<a href='http://www.nuggetsapp.com'> Download Nuggets</a> to save and remember everything you learn.", highlightText);
       markup_to_push += '</div></div></div>';
-      if(i%3 == 0) {
+      if(numColumns == 3)
+      {
+        if(i%3 == 0) {
+          markup_to_push_col1 += markup_to_push;
+        }
+        else if (i%3 == 1) markup_to_push_col2 += markup_to_push;
+        else if (i%3 == 2) markup_to_push_col3 += markup_to_push;
+      } 
+      else if (numColumns == 1)
+      {
         markup_to_push_col1 += markup_to_push;
       }
-      else if (i%3 == 1) markup_to_push_col2 += markup_to_push;
-      else if (i%3 == 2) markup_to_push_col3 += markup_to_push;
-      //else markup_to_push_col4 += markup_to_push;
 
     }
     var markup_to_push = '';
@@ -107,22 +126,35 @@ function updateMyNuggetsMarkup(results, highlightText)
     markup_to_push += '</div></div>';
     markup_to_push += '<div class ="nugget-toolbar"> <span class="span1 fa nugget-action-icons"><span class = "nugget-action-icons-left"><a class="fa-link nugget-action-icon" style="color:white" target="_blank" href="' + results[i].url + '">' + '</a><a class="fa-twitter nugget-action-icon" style="color:white" target="_blank" href="' + twitterUrl(results[i]) + '""></a></span><span class="nugget-action-icons-right"></span></span></div>';
     markup_to_push += '</div></div>';
-    if(i%3 == 0) {
+    if(numColumns == 3)
+    {
+      if(i%3 == 0) {
+        markup_to_push_col1 += markup_to_push;
+      }
+      else if (i%3 == 1) markup_to_push_col2 += markup_to_push;
+      else if (i%3 == 2) markup_to_push_col3 += markup_to_push;
+    } 
+    else if (numColumns == 1)
+    {
       markup_to_push_col1 += markup_to_push;
     }
-    else if (i%3 == 1) markup_to_push_col2 += markup_to_push;
-    else if (i%3 == 2) markup_to_push_col3 += markup_to_push;
     //else markup_to_push_col4 += markup_to_push;
     
   }
-  markup_to_push_col1 += "</div></div>";
-  markup_to_push_col2 += "</div></div>";
-  markup_to_push_col3 += "</div></div>";
-  markup_to_push_col4 += "</div></div>";
-  my_nuggets_markup.push(markup_to_push_col1);
-  my_nuggets_markup.push(markup_to_push_col2);
-  my_nuggets_markup.push(markup_to_push_col3);
-  //my_nuggets_markup.push(markup_to_push_col4);
+  if(numColumns == 3)
+  {
+    markup_to_push_col1 += "</div></div>";
+    markup_to_push_col2 += "</div></div>";
+    markup_to_push_col3 += "</div></div>";
+    my_nuggets_markup.push(markup_to_push_col1);
+    my_nuggets_markup.push(markup_to_push_col2);
+    my_nuggets_markup.push(markup_to_push_col3);
+  }
+  else if(numColumns == 1)
+  {
+    markup_to_push_col1 += "</div></div>";
+    my_nuggets_markup.push(markup_to_push_col1);
+  }
   $('#my-nuggets-table').html(my_nuggets_markup.join(''));
 }
 

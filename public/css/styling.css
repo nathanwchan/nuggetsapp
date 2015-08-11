@@ -453,7 +453,7 @@ text-decoration: none;
 
 #login-body .input-append input[class*="span"], .input-append .uneditable-input[class*="span"], .input-prepend input[class*="span"], .input-prepend .uneditable-input[class*="span"], .row-fluid input[class*="span"], .row-fluid select[class*="span"], .row-fluid textarea[class*="span"], .row-fluid .uneditable-input[class*="span"], .row-fluid .input-prepend [class*="span"], .row-fluid .input-append [class*="span"] {
     display: inline-block;
-    width: 500px;
+    width: 350px;
     height: 40px;
 }
 
@@ -462,16 +462,40 @@ text-decoration: none;
     margin-top: 4px; 
 }
 
+img.logo-header {
+    width: 200px;
+    margin-top: 70px; 
+}
+
+@media (max-width: 500px) {
+    img.logo-header {
+    margin-top: 0px; 
+}
+}
+
 .download
 {
     display: block;
     margin-left: -10px;
 }
 
+@media (max-width: 500px) {
+   .download
+    {
+        display: none;
+    }
+}
+
 .download a 
 {
     text-decoration: none; 
     color:white;
+}
+
+.icon-question-sign {
+    background-position: -96px -96px;
+    margin-top: -35px;
+    margin-left: 325px;
 }
 
 .brand a 
