@@ -33,7 +33,6 @@ if ('development' == app.get('env')) {
 }
 
 
-
 app.get('/', routes.index);
 //app.get('/users', user.list);
 app.get('/login/:id?', function(req, res) {
@@ -52,12 +51,18 @@ app.get('/login', function(req, res) {
 app.get('/create', function(req, res) {
     res.render('create');
 });
+
 app.get('/my-nuggets', function(req, res) {
     res.render('my-nuggets');
 });
 app.get('/welcome', function(req, res) {
     res.render('welcome');
 });
+
+app.get('/howtostartastartup/', function(req, res) {
+      res.redirect('/howtostartastartup');
+});
+
 app.get('/howtostartastartup', function(req, res) {
       res.render('howtostart');
 });
