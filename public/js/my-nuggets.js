@@ -61,10 +61,12 @@ function updateMyNuggetsMarkup(results, highlightText)
    var span = 4; 
    var width = $(window).width(); 
    console.log(width);  
+   var enableRandomFont = true; 
    if(width < 750 || ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
    {
       numColumns = 1; 
       span = 12; 
+      enableRandomFont = false; 
    }
 
    var markup_to_push_col1 ='<div class="span'+ span +'">';
@@ -75,7 +77,8 @@ function updateMyNuggetsMarkup(results, highlightText)
   {
     var markup_to_push = '';
     randomId = Math.round(Math.random()*10) + 1;
-    randomFont = Math.round(Math.random()*5) + 1;
+    randomFont = enableRandomFont? Math.round(Math.random()*5) + 1 : 1; 
+
     markup_to_push += '<div class="row-fluid f' + randomFont + '"><div class="nugget-wrapper" id="g'+ randomId +'"><div id="' + results[i].id + '" class="nugget-content"><p>' + addHighlightMarkup(results[i].text, highlightText);
     var tags = results[i].tags;
     
