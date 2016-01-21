@@ -59,8 +59,9 @@ function updateMyNuggetsMarkup(results, highlightText)
    var randomFont; 
    var numColumns = 3; 
    var span = 4; 
-   var width = $(window).width()
-   if(width < 600)
+   var width = $(window).width(); 
+   console.log(width);  
+   if(width < 750 || ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
    {
       numColumns = 1; 
       span = 12; 
