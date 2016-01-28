@@ -13,6 +13,11 @@
     margin-right: auto;
 }
 
+#welcome-nuggets-div {
+    margin-top: 20px;
+
+}
+
 .myButton {
     background-color: #5837F2;
     -moz-border-radius: 40px;
@@ -407,6 +412,8 @@ text-decoration: none;
 
 #welcome-done-button {
     margin-bottom: 20px;
+    margin-top: 5px; 
+    padding: 15px; 
 }
 
 .highlight {
@@ -513,12 +520,12 @@ img.logo-header {
 }
 
 .btn-primary {
-    background-color: #FF6600;
+    background-color: #04c;
 }
 
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .btn-primary.disabled, .btn-primary[disabled] {
     color: #fff;
-    background-color: #04c;
+    background-color: rgb(255, 155, 0);
 }
 
 #login-div {
@@ -533,6 +540,73 @@ img.logo-header {
 
 .nugget-wrapper {
 }
+
+.walkthrough-slide-wrapper {
+    position: relative;
+    margin-bottom: -10px;
+    margin-top:20px;
+    padding-top: 12%;
+    padding-bottom: 12%;
+    background: white;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+}
+
+.walkthrough-slide-content {
+    color:black;
+    text-align: center;
+
+}
+
+.number {
+    color: gray; 
+}
+
+.walkthrough-slide-content h2 {
+    margin-top: 5%; 
+    font-size: 28px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+.walkthrough-slide-content p {
+    font-size: 16px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+@media screen and (max-width: 480px) {
+.walkthrough-slide-content h2 {
+    margin-top: 5%; 
+    font-size: 16px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+}
+
+@media screen and (max-width: 480px) {
+
+    .walkthrough-slide-content p {
+    font-size: 12px;
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+}
+
+.walkthrough-icon {
+    font-family: fontawesome; 
+    font-style: normal;
+    font-size: 62px; 
+    font-color: gray;
+}
+
+.carousel-indicators {
+    position: absolute;
+    top: 40px; 
+    bottom: 10px;
+    z-index: 15;
+    width: 53%;
+    padding-left: 0;
+    margin-left: -30%;
+    text-align: center;
+    list-style: none;
+}
+
 
 .nugget-action-icons 
 { 

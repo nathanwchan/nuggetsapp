@@ -3,6 +3,9 @@ $(document).ready(function(){
 var welcome_nuggets = [];
 var welcome_nuggets_to_show = 5;
 var next_welcome_nugget_index = 0;
+$('.carousel').carousel({
+  interval: 4000
+})
 
 function initialize() {
   Parse.initialize("F1fRCfIIYQzvft22ckZd5CdrOzhVecTXkwfgWflN", "DUoWr9lIjQME2MmqgMApFmWFdzMcl7B6mKfj8AAc");

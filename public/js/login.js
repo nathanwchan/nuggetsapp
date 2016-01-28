@@ -30,7 +30,7 @@ function goToNuggetPage()
 
 function goToWelcomePage()
 {
-  window.location.replace('welcome.html');
+  window.location.replace('welcome');
 }
 
 initialize();

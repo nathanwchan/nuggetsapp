@@ -2,6 +2,7 @@
 <html>
   <head>
     <title>Nuggets</title>
+    <link rel="icon" type="image/x-icon" href="/img/nuggets_logo_notext.png">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-responsive.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="/css/bootstrap-tokenizer.css">
@@ -9,25 +10,80 @@
     <script type="text/javascript" src="/js/jquery-1.10.1.min.js"></script>
     <script type="text/javascript" src="/js/bootstrap.js"></script>
     <script type="text/javascript" src="/js/parse-1.2.8.min.js"></script>
-    <script type="text/javascript" src="/js/welcome.js"></script>
+    <script type="text/javascript" src="/js/welcome-compiled.js"></script>
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
   </head>
   <body id="extension-body">
     <div class="navbar navbar-fixed-top">
       <div class="navbar-inner">
-        <img src="/img/nuggets24.png" class="pull-left navbar-icon"/>
+        <img src="/img/nuggets_logo_notext.png" class="pull-left navbar-icon"/>
         <span class="brand">Welcome to Nuggets!</span>
       </div>
     </div>
     <div id="extension-container">
       <div class="row-fluid">
         <div id="welcome-nuggets-div" class="span12" style="display: none;">
+          <p class="lead">3 Steps to Effective Learning</p>
+          <div id="carousel-example-generic" class="carousel slide" data-ride="carousel" interval="2000">
+  <!-- Indicators -->
+            <ol class="carousel-indicators">
+              <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="1"></li>
+              <li data-target="#carousel-example-generic" data-slide-to="2"></li>
+            </ol>
+
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner" role="listbox">
+              <div class="item active">
+                <div class="walkthrough-slide-wrapper" id="g5">
+                  <div class="walkthrough-slide-content">
+                    <i class="walkthrough-icon fa-pencil-square-o"></i>
+                    <h2><span class="number"> 1. </span> Record everything you learn in Nuggets</h2>
+                    <p>Make it a habit. Create atleast one nugget a day for the next weeek.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="walkthrough-slide-wrapper" id="g4">
+                  <div class="walkthrough-slide-content">
+                    <i class="walkthrough-icon fa-bell-o"></i>
+                    <h2><span class="number"> 2. </span> Review your reminders</h2>
+                    <p>Nuggets will send you reminder emails that are curated and timed to maximize retention.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="item">
+                <div class="walkthrough-slide-wrapper" id="g2">
+                  <i class="walkthrough-icon fa-users"></i>
+                  <div class="walkthrough-slide-content">
+                    <h2><span class="number"> 3. </span> Browse, share, and learn from others</h2>
+                    <p>You can browse your own nuggets and (coming soon) nuggets shared by the community</p>
+                  </div>
+                </div>
+              </div>
+              
+            </div>
+
+            <!-- Controls -->
+            <!--
+            <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
+              <span class="fa fa-chevron-left" aria-hidden="true"></span>
+            </a>
+            <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
+              <span class="fa fa-chevron-right" aria-hidden="true"></span>
+            </a>
+            --!>
+          </div>
+          <!--
           <p class="lead">Let's get started!</p>
-          <p class="welcome-subtext">Click the plus (+) button of any of the "nuggets" you think are worth remembering.</p>
+          <p class="welcome-subtext">Here are a few nuggets to start you off. Click the plus (+) button of any of the "nuggets" you think are worth remembering.</p>
           <table class="table">
             <tbody id="welcome-nuggets-table">
             </tbody>
           </table>
-          <a id="welcome-done-button" href="my-nuggets" class="btn btn-primary offset4 span4">Done!</a>
+        -->
+          <a id="welcome-done-button" href="my-nuggets" class="btn btn-primary offset4 span4">Start using Nuggets!</a>
         </div>
       </div>
     </div>
