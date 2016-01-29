@@ -4,7 +4,7 @@ var welcome_nuggets = [];
 var welcome_nuggets_to_show = 5;
 var next_welcome_nugget_index = 0;
 $('.carousel').carousel({
-  interval: 4000
+  interval: 4500
 })
 
 function initialize() {
