@@ -60,7 +60,6 @@ function updateMyNuggetsMarkup(results, highlightText)
    var numColumns = 3; 
    var span = 4; 
    var width = $(window).width(); 
-   console.log(width);  
    var enableRandomFont = true; 
    if(width < 750 || ( /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)))
    {
@@ -140,40 +139,6 @@ function updateMyNuggetsMarkup(results, highlightText)
   }
   //my_nuggets_markup.push(markup_to_push_col4);
   $('#my-nuggets-table').html(my_nuggets_markup.join(''));
-}
-
-function socialPost(nugget, isfb)
-{
-  if(!isfb)
-  {
-    var content = nugget.text; 
-    var url = nugget.url; 
-    var limit = 90; 
-    if(url.length == 0) limit = 110; 
-    if(content.length > limit) 
-    {
-      content = content.substring(0,limit);
-      content += "... ";
-    }
-  
-  }
-    
-  return content + url + " via @nuggetsapp"; 
-  
-  
-}
-
-function twitterUrl(nugget)
-{
-  // ßalert(socialPost(nugget, false)); 
-  return "https://twitter.com/intent/tweet?text=" + socialPost(nugget, false); 
-}
-
-
-function facebookUrl(nugget)
-{
-  var appId = "1622775527965531"; 
-  return "https://www.facebook.com/dialog/share?app_id=" + appId + "&display=popup&href=" + socialPost(nugget, true) + "&redirect_uri=" + window.location.href;
 }
 
 function runQuery()
